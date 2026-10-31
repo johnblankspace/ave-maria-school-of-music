@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-poppins: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  /* Brand color tokens from docs/design-system.md Section 3 */
+  --color-deep-navy: #021024;
+  --color-royal-navy: #052659;
+  --color-steel-blue: #5483B3;
+  --color-soft-blue: #7DA0CA;
+  --color-ice-blue: #C1E8FF;
+  --color-cloud-white: #F7FAFD;
+  --color-mist-grey: #EDF2F7;
+  --color-border-grey: #CBD5E1;
+  --color-slate-grey: #475569;
+  --color-dark-slate: #0F172A;
+}
+
+/* Global document defaults */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  color: var(--color-dark-slate);
+  background-color: var(--color-cloud-white);
+}
+
+/* Respect user reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

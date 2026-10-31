@@ -1,11 +1,17 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/layout/Layout';
+import HomePage from './pages/HomePage';
 
-function App() {
+export default function App() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-900">
-      <h1 className="text-3xl font-bold text-white">
-        Ave Maria School of Music
-      </h1>
-    </div>
-  )
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          {/* Catch-all fallback route redirects to HomePage */}
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
 }
-export default App
