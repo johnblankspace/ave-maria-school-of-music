@@ -174,22 +174,21 @@ Resolve relevant errors before committing changes.
 
 ## Further Documentation
 
-As project documentation is added, use these files as detailed
-references:
+### Existing Project Documentation
 
 -   `AGENTS.md` --- instructions for AI coding agents.
--   `docs/requirements.md` --- approved business and functional
-    requirements.
--   `docs/architecture.md` --- application architecture and code
-    organisation.
+-   `docs/requirements.md` --- working requirements baseline pending final owner approval.
+-   `docs/architecture.md` --- application architecture and code organisation.
 -   `docs/implementation-plan.md` --- development phases and task order.
 -   `docs/seo.md` --- SEO and public-page requirements.
 -   `docs/design-system.md` --- visual design and reusable UI rules.
--   `docs/database-schema.md` --- database tables and relationships.
--   `docs/security.md` --- authentication, authorisation, and data
-    protection.
--   `docs/testing.md` --- testing strategy and acceptance checks.
--   `docs/deployment.md` --- production hosting and release steps.
+
+### Planned Documentation (Later Phases)
+
+-   `docs/database-schema.md` (Planned) --- database tables and relationships.
+-   `docs/security.md` (Planned) --- authentication, authorisation, and data protection.
+-   `docs/testing.md` (Planned) --- testing strategy and acceptance checks.
+-   `docs/deployment.md` (Planned) --- production hosting and release steps.
 
 Add links to documents as they are created, and keep this README aligned
 with the actual project setup.

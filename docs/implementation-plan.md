@@ -13,7 +13,7 @@ A feature being listed in this plan does not mean it is implemented.
 
 Use the existing JavaScript/JSX, React, Vite, Tailwind CSS v4, React Router DOM, React Hook Form, Zod, Supabase client, and Lucide React stack. Do not introduce TypeScript, switch frameworks, or replace the styling/backend approach without an approved decision. Inspect the repository and `package.json` before assuming a dependency or script is available.
 
-## 2. Working rules
+## 3. Working rules
 
 1. Work on one coherent feature or small group of related tasks at a time.
 2. Read the requirements and relevant documentation before coding.
@@ -26,7 +26,7 @@ Use the existing JavaScript/JSX, React, Vite, Tailwind CSS v4, React Router DOM,
 9. Update documentation when a decision changes.
 10. Do not store secrets or real student data in Git.
 
-## 3. Phase overview
+## 4. Phase overview
 
 | Phase | Goal | Main deliverables | Gate to continue |
 |---|---|---|---|
@@ -41,12 +41,12 @@ Use the existing JavaScript/JSX, React, Vite, Tailwind CSS v4, React Router DOM,
 | 8. Student portal | Give students access to their own permitted information | Dashboard, class joining, materials, certificates, announcements | Student isolation and class-link authorization tested |
 | 9. Operational improvements | Add only approved later capabilities | Potential family accounts, digital courses, additional content controls | Scope, business rules, and technical design approved |
 
-## 4. Phase 0 — Documentation and repository baseline
+## 5. Phase 0 — Documentation and repository baseline
 
 Tasks:
-- Replace the existing `docs/requirements.md` with the corrected working baseline.
-- Update `AGENTS.md` so it contains no superseded form/enrollment rules.
-- Create and cross-check `docs/architecture.md`, `docs/design-system.md`, `docs/implementation-plan.md`, and `docs/seo.md`.
+- Reconcile and maintain `docs/requirements.md` as the working baseline pending final owner approval.
+- Maintain `AGENTS.md` so it contains no superseded form/enrollment rules.
+- Cross-check and maintain `docs/architecture.md`, `docs/design-system.md`, `docs/implementation-plan.md`, and `docs/seo.md`.
 - Inspect `package.json`, Vite/Tailwind configuration, routes, assets, environment files, and Git status.
 - Confirm what already exists before creating duplicates.
 - Identify any documentation claims that conflict with current code.
@@ -56,7 +56,7 @@ Acceptance criteria:
 - Existing code and assets are not removed or rewritten merely to match a proposed folder tree.
 - Open questions are listed, not silently decided.
 
-## 5. Phase 1 — Public site foundation
+## 6. Phase 1 — Public site foundation
 
 Tasks:
 - Confirm the current app entry point and scripts.
@@ -67,11 +67,11 @@ Tasks:
 
 Acceptance criteria:
 - App starts and builds using the repository's actual scripts.
-- No horizontal overflow at 375, 425, 768, and 1024 px.
+- No horizontal overflow at 375, 425, 768, 1024, and 1440 px.
 - Keyboard focus and mobile navigation work.
 - Visual tokens come from `docs/design-system.md`.
 
-## 6. Phase 2 — Public content
+## 7. Phase 2 — Public content
 
 Implement in small batches:
 1. Hero and primary/secondary CTAs.
@@ -88,7 +88,7 @@ Acceptance criteria:
 - Video has a fallback, muted inline autoplay request, looping, and sound control.
 - No CTA points to a duplicate form or dead destination.
 
-## 7. Phase 3 — Single inquiry/free-trial form
+## 8. Phase 3 — Single inquiry/free-trial form
 
 Tasks:
 - Implement exactly one shared form immediately before the homepage footer.
@@ -107,7 +107,7 @@ Acceptance criteria:
 - No false success message is shown when submission fails.
 - The minimum age is not published on the website.
 
-## 8. Phase 4 — Public-site launch readiness
+## 9. Phase 4 — Public-site launch readiness
 
 Tasks:
 - Implement page-specific titles/descriptions, canonical URL strategy once the final domain/route map is approved, and relevant indexability rules.
@@ -122,7 +122,7 @@ Acceptance criteria:
 - Hosting/DNS decisions are explicitly approved and documented.
 - Final production URL and canonical URL use the same approved host format.
 
-## 9. Phase 5 — Lead management
+## 10. Phase 5 — Lead management
 
 Prerequisites:
 - Public form behaviour and data fields are approved.
@@ -142,7 +142,7 @@ Acceptance criteria:
 - Only authorised admins can read/update leads.
 - RLS and backend authorization are tested.
 
-## 10. Phase 6 — Authentication and admin foundation
+## 11. Phase 6 — Authentication and admin foundation
 
 Tasks:
 - Configure Supabase Auth securely.
@@ -158,7 +158,7 @@ Acceptance criteria:
 - Unauthorized users cannot access protected admin data through direct requests.
 - Roles are enforced in backend/database policies, not just React routes.
 
-## 11. Phase 7 — Student and class operations
+## 12. Phase 7 — Student and class operations
 
 Tasks:
 - Admin manages student records and levels; Beginner is the default unless admin changes it.
@@ -175,7 +175,7 @@ Acceptance criteria:
 - No automated payment gateway is assumed.
 - Makeup/cancellation rules are not invented.
 
-## 12. Phase 8 — Student portal
+## 13. Phase 8 — Student portal
 
 Tasks:
 - Display relevant upcoming class information.
@@ -191,23 +191,23 @@ Acceptance criteria:
 - Exact access cutoff after scheduled start is decided before implementation.
 - Certificate claims do not imply official accreditation without verification.
 
-## 13. Phase 9 — Later enhancements
+## 14. Phase 9 — Later enhancements
 
 Possible candidates include family accounts, paid digital courses, additional admin content controls, and public student performances. These are not part of the first release and require explicit prioritisation and requirements before implementation.
 
-## 14. Cross-phase verification checklist
+## 15. Cross-phase verification checklist
 
 For each relevant release:
 - Build/test/lint commands are discovered from actual `package.json` scripts and run.
 - No console errors or broken routes.
-- Responsive widths 375, 425, 768, 1024 px are checked.
+- Responsive widths 375, 425, 768, 1024, and 1440 px are checked.
 - Keyboard navigation, visible focus, form labels/errors, contrast, and reduced motion are checked.
 - Public claims and testimonials are approved.
 - No secrets or student personal information are committed or exposed.
 - Protected data is checked with both authorised and unauthorised test users.
 - Documentation reflects the actual implementation and known limitations.
 
-## 15. Decisions that can block specific phases
+## 16. Decisions that can block specific phases
 
 These do not all block public UI development. Resolve them when their phase needs them:
 - Exact form required/optional fields and consent wording.

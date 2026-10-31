@@ -122,7 +122,7 @@ For authenticated functionality:
 
 - Use the approved Poppins font and palette from `docs/design-system.md`.
 - Preserve the supplied brand spelling and approved content.
-- Support the documented responsive widths: 375 px, 425 px, 768 px, and 1024 px, plus sensible intermediate/wide layouts.
+- Support the documented responsive widths: 375 px, 425 px, 768 px, 1024 px, and 1440 px, plus sensible intermediate/wide layouts.
 - Ensure keyboard navigation, visible focus, semantic HTML, form labels, meaningful button names, and sufficient contrast.
 - Respect reduced-motion preferences. Do not make animated content the only way to understand information.
 - The tutor video should support muted inline autoplay and looping, provide a sound control, and have a useful fallback. Do not rely on autoplay with sound.

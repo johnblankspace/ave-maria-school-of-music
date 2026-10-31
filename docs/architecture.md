@@ -193,7 +193,7 @@ Do not commit secrets or real student data. Confirm the repository's `.gitignore
 At minimum, verify:
 - Public routes, navigation, and all CTAs.
 - Exactly one inquiry form and correct anchor navigation.
-- Responsive layouts at 375, 425, 768, and 1024 px.
+- Responsive layouts at 375, 425, 768, 1024, and 1440 px.
 - Form validation, server-confirmed submission state, and failure handling.
 - RLS and authorization with both allowed and disallowed test users before protected features go live.
 - Class-link access before and after the allowed window, once the full window policy is approved.

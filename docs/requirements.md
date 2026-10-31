@@ -2,7 +2,7 @@
 
 **Document:** `docs/requirements.md`  
 **Project:** Ave Maria School of Music  
-**Status:** Corrected working baseline — audited against the source requirements and latest owner decisions  
+**Status:** Working baseline pending final owner approval — audited against the source requirements and latest confirmed decisions  
 **Primary objective:** Launch a public website that attracts prospective students and generates free trial-class enquiries, followed by the phased development of student and administrative functionality.
 
 ---
@@ -32,7 +32,7 @@ The source requirements document defines functional requirements `FR-001` throug
 
 The main resolved conflict is `FR-055` versus the older, contradictory wording under `FR-058`: there must be **one shared inquiry/free-trial form**, placed immediately before the footer. Contact navigation and every trial CTA must lead to that same form. `FR-058` is retained as an identifier for the form/submission requirement, but its former implication that a separate second form is needed is superseded.
 
-This is a corrected working baseline, not evidence that any feature has been implemented. Open items are listed in Section 12.
+This is a working baseline pending final owner approval, not evidence that any feature has been implemented. Open items are listed in Section 12.
 
 ---
 
@@ -86,7 +86,7 @@ The confirmed business model includes:
 - Manual bank transfers as the initial payment method.
 - Students providing their own musical instrument.
 
-The exact meaning of a lesson *section*, makeup-class rules, fees, and payment-recording procedures remain to be confirmed where not already agreed.
+The exact operational meaning of a lesson *section*, exact fee amounts, and internal payment-recording procedures remain to be confirmed where not already agreed.
 
 ### 2.4 Verified content requirement
 
@@ -450,7 +450,7 @@ Relevant confirmed points include:
 - The teacher can provide instrument-buying information directly when requested.
 - Flexible time slots are offered for overseas students.
 
-Fees, makeup-class rules, minimum student age, and other unresolved policies must not be invented in FAQ answers.
+Published fees, unapproved cancellation/rescheduling policies, minimum student age, and other unresolved details must not be invented in FAQ answers.
 
 **Acceptance criteria**
 
@@ -559,27 +559,22 @@ These requirements describe planned later functionality. They do not imply that 
 
 ### 7.1 Authentication and account setup
 
-The confirmed onboarding flow is admin-managed: the student/parent submits the shared form and provides the intended account email; the admin contacts them on WhatsApp, arranges a trial, collects one month's tuition in advance if they choose to continue, then creates/invites the account. The student/parent receives an expiring activation link by email and creates their own password. If the link expires, they contact the admin for a new link. The exact expiry period remains undecided.
+The confirmed onboarding and account-provisioning flow is admin-managed:
 
-- Do not distribute permanent passwords over WhatsApp.
-- Email/password authentication is planned.
-- Google login is optional/proposed, not a mandatory launch requirement.
-- Student and administrator permissions must be enforced by backend authorization and database policies, not just frontend routes.
-- The data model should allow future family/guardian relationships without a wholesale redesign.
-- Children and adults may be students; do not equate “student” with “adult account holder.”
+1. **Inquiry and Trial:** The prospective student or parent/guardian submits the single shared inquiry form, providing student information and the email address intended for the student account. The admin contacts them on WhatsApp to arrange a free trial class.
+2. **Advance Tuition Collection:** If the student chooses to continue after the trial, the admin collects one month's tuition in advance via manual bank transfer.
+3. **Admin Invitation:** The administrator creates and invites the student account using the submitted email address.
+4. **Account Activation:** The student/parent receives an expiring account-activation link by email and uses it to create their password.
+5. **Expired-Link Recovery:** If the activation link expires before use, the student/parent must contact the admin to request a replacement link. The exact activation-link expiry duration remains undecided.
 
+**Authentication rules and capabilities:**
 
-The planned authentication capabilities include:
-
-- Email/password login.
-- Password recovery.
-- Role-based access.
-- A controlled method for creating or inviting student accounts.
-- A secure process for setting or resetting passwords.
-
-The preferred account-provisioning approach is to let the administrator invite a student and provide a password-setup or reset link, rather than distributing a permanent password over WhatsApp or email.
-
-Google login was discussed as a preference, but its inclusion in the first authenticated release is not confirmed.
+- **Authentication method:** Secure email and password login.
+- **Password recovery:** A secure process for setting, recovering, and resetting passwords.
+- **No plaintext password distribution:** Do not distribute permanent passwords over WhatsApp or email; account setup and recovery must use secure invitation and reset links.
+- **Backend authorization:** Role-based access control. Permissions for both students and administrators must be enforced strictly by backend authorization and database policies (such as Supabase Row Level Security), never solely by client-side routes or interface visibility.
+- **Data model flexibility:** Children and adults may be students; do not equate “student” with an “adult account holder.” The data model must support student and guardian separation and accommodate future family/guardian relationships without requiring a structural redesign.
+- **Google login status:** Google login was discussed as an optional preference; its inclusion in the first authenticated release remains proposed and unconfirmed.
 
 **Acceptance criteria**
 
@@ -612,54 +607,51 @@ The exact dashboard layout and feature release order will be established in the 
 
 ### 7.3 Class scheduling
 
-- Each student receives four classes per month.
-- Each class lasts 30–45 minutes.
-- Scheduling is flexible and agreed with the student/parent, taking their timezone and availability into account.
-- Makeup classes are arranged directly between the tutor and student/parent. They agree on a suitable date, and the agreed arrangement is updated in the student dashboard.
-- Do not invent cancellation fees, notice periods, automatic credits, or a fixed makeup entitlement beyond the confirmed arrangement.
+**Confirmed regular class rules:**
 
+- **Frequency:** Each enrolled student receives four regular classes per month (referred to as four classes per section/month in the source baseline).
+- **Class duration:** Each regular class lasts 30–45 minutes.
+- **Format:** One-to-one online classes with flexible scheduling agreed directly with the student or parent/guardian.
+- **Time-zone handling:** The application must account for time zones so that classes scheduled for overseas students are displayed accurately in the student's local time.
+- **Makeup lessons:** Makeup classes are arranged directly between the tutor and the student/parent. They agree on a suitable date and time, and the agreed arrangement is updated in the student dashboard.
+- **Policy boundaries:** Do not invent cancellation fees, advance notice penalties, automatic credits, or a fixed makeup entitlement beyond the confirmed direct-arrangement model.
 
+**Teacher scheduling capabilities:**
 
-The system is intended to support one-to-one classes with flexible scheduling for overseas students.
+- The teacher must be able to maintain class schedules, view sessions, and associate classes with the appropriate enrolled student.
+- Conflicting class bookings must be prevented once the scheduling system is implemented.
+- Scheduling rules must not contradict the teacher's confirmed availability.
 
-The teacher must be able to maintain class schedules and associate classes with the appropriate student.
+**Unresolved scheduling items:**
 
-The application should account for time zones so that a class scheduled for an overseas student is displayed at the intended local time.
-
-The exact scheduling rules, class duration, booking workflow, cancellation rules, and makeup-class policy remain to be confirmed.
+- The duration of the initial free trial class and the exact booking workflow (whether the trial form records a request or confirms an appointment) remain to be confirmed (see OQ-05).
+- The exact operational definition of a class “section” in records remains to be confirmed (see OQ-06).
 
 **Acceptance criteria**
 
 - Class records are associated with the correct student.
-- Time-zone handling is consistent.
+- Time-zone handling is consistent across overseas and domestic viewports.
 - Conflicting class bookings are prevented when the scheduling system is implemented.
 - Scheduling rules do not contradict the teacher's confirmed availability.
 
 ### 7.4 Class joining and Zoom
 
-- The private class link is available through the authenticated student's dashboard, not exposed as a public URL.
-- The “Join Class” button becomes active **five minutes before the scheduled start time**.
-- Access must be authorized on the server/backend; hiding or disabling a frontend button alone is not security.
-- Only the correct authorized student may retrieve the relevant link.
-- The end of the permitted access window has not been specified. Do not invent an after-start or after-end cutoff.
-- Zoom is the planned online-class platform. Waiting-room/passcode configuration should be used where supported by the school's Zoom setup.
+**Class-joining workflow and platform:**
 
-
-
-Zoom is the planned platform for online classes.
-
-The student should receive the appropriate class-joining link only when authorised.
-
-The planned security approach is to perform access checks on the server before returning private class-link information.
+- **Platform:** Zoom is the planned platform for online classes. Waiting-room and passcode protection should be used where supported by the school's Zoom configuration.
+- **Location:** The private class link is accessible only through the authenticated student's dashboard; it must never be exposed as a public URL or in public page bundles.
+- **Window activation:** The “Join Class” button becomes active **five minutes before the scheduled start time**.
+- **Server-side authorization:** Class-link retrieval must be authorized on the trusted server/backend. The backend must independently verify the user's identity, confirm that the student is assigned to the scheduled session, and ensure the current time falls within the permitted window before releasing the meeting link. Disabling or hiding a client-side button is not a security boundary.
+- **Isolation:** Only the authorized student assigned to a session may retrieve the class link. Students must never be able to access another student's meeting link.
+- **Failure handling:** Requests that fail authorization or timing checks must fail closed and must not reveal private meeting IDs, passwords, or class URLs.
+- **Unresolved window cutoff:** The end of the permitted access window (how long after the scheduled start or class end a student may access or re-enter the link) has not been specified (see OQ-08). Do not invent an after-start or after-end cutoff. The precise server-side implementation details remain to be finalised.
 
 **Acceptance criteria**
 
 - Unauthorised users cannot retrieve private class links.
-- Zoom credentials and private meeting details are not embedded in public source code.
-- Class-link access follows an approved time window and authorisation policy.
-- Failure to authorise a request does not reveal private class information.
-
-The precise access window and server-side implementation remain to be finalised.
+- Zoom credentials and private meeting details are not embedded in public source code or public bundles.
+- Class-link access follows an approved time window and server-side authorisation policy.
+- Failure to authorise a request fails closed and does not reveal private class information.
 
 ### 7.5 Attendance
 
@@ -708,29 +700,30 @@ File-size limits, allowed formats, retention rules, and the final storage config
 
 ### 7.8 Student levels, examinations, and certificates
 
-- A student starts at the **Beginner** level unless the admin decides otherwise.
-- The admin controls the available stage/level definitions and can update a student's level, for example from Beginner to Intermediate.
-- The tutor/admin may conduct practical examinations when appropriate; results may be recorded in the student record if this feature is implemented.
-- Certificate issuance is controlled by the admin. A certificate may be issued based on stage completion, examination results, or an explicit admin decision.
-- Students can view/download only certificates issued to them.
-- Student level, enrolment status, exam results, and certificate issuance are separate pieces of information and must not be treated as interchangeable.
-- Certificate templates, exact stage names, eligibility criteria, and certificate wording are not yet finalized.
-- Do not imply official Trinity College London certification, accreditation, or endorsement unless the school verifies that claim and approves the exact wording.
+**Student levels:**
 
+- **Default starting level:** An enrolled student starts at the **Beginner** level unless the administrator explicitly assigns a different starting level.
+- **Admin level management:** The administrator controls the available stage and level definitions and updates a student's level (for example, advancing a student from Beginner to Intermediate) based on instructional progress.
 
+**Practical examinations:**
 
-The broader plan includes digital certificates that students may download after completing an approved book or learning milestone.
+- The tutor/administrator may conduct practical examinations when pedagogically appropriate.
+- When the examination feature is implemented, examination results may be recorded within the student's private record.
 
-The issuance rules, certificate templates, identifiers, and completion criteria require confirmation.
+**Digital certificate issuance:**
 
-The system must distinguish school-issued certificates from official Trinity College London certificates.
+- **Administrative control:** Certificate issuance is strictly controlled by the administrator. A certificate may be issued following stage completion, completion of an approved book or learning milestone, practical examination results, or an explicit administrative decision.
+- **Access restriction:** Students can view and download only digital certificates that have been officially issued to their own account.
+- **Entity separation:** Student level, enrolment status, examination results, and certificate issuance are distinct pieces of data and must be maintained separately; they must not be treated as interchangeable.
+- **Trinity College London distinction:** The system, certificate templates, and public marketing content must strictly distinguish school-issued certificates from official Trinity College London certificates. Do not imply official Trinity College London certification, accreditation, syllabus endorsement, or examination authority unless the school verifies that claim and explicitly approves the exact wording.
+- **Unresolved certificate details:** Specific certificate visual templates, unique certificate identifiers, exact stage/level names, completion criteria, and final certificate wording remain to be confirmed (see OQ-11).
 
 **Acceptance criteria**
 
-- Certificates are issued only according to approved rules.
-- Student and completion details are accurate.
+- Certificates are issued only according to approved rules and administrative authorization.
+- Student and completion details on issued certificates are accurate.
 - Certificates do not imply official recognition or accreditation that has not been confirmed.
-- Certificate access is restricted to authorised users where appropriate.
+- Certificate access and downloads are restricted to authorised students.
 
 ### 7.9 Announcements
 
@@ -1061,7 +1054,7 @@ The following details must not be treated as established facts until confirmed:
 - Trial-class duration and scheduling process.
 - Fee amounts and published pricing.
 - Exact meaning of a class section.
-- Makeup-class rules.
+- Any formal cancellation or notice rules beyond direct tutor-parent arrangement.
 - Lead-notification and follow-up workflow.
 - Student account invitation and recovery details.
 - Google login for the student portal.
@@ -1088,7 +1081,7 @@ The following questions should be resolved when they become relevant to implemen
 | OQ-04 | What are the exact lead statuses and permitted transitions? | Determines lead-management behaviour. | Implementing the admin lead workflow. |
 | OQ-05 | What is the exact trial-class booking and confirmation process? | Determines whether the form records a request or confirms an appointment. | Implementing the enquiry workflow. |
 | OQ-06 | What does one class section mean operationally? | Affects class and payment records. | Designing class and payment data. |
-| OQ-07 | What are the makeup-class and cancellation rules? | Affects scheduling and attendance workflows. | Implementing class management. |
+| OQ-07 | Are there any formal cancellation or notice rules beyond direct tutor-parent arrangement? | Affects scheduling and attendance workflows. | Implementing class management. |
 | OQ-08 | What time window permits a student to join a Zoom class? | Determines class-link authorisation. | Implementing secure class joining. |
 | OQ-09 | Will Google login be included in the first authenticated release? | Affects authentication scope. | Finalising authentication. |
 | OQ-10 | What are the study-material file limits, formats, and retention rules? | Affects storage and access policies. | Implementing material management. |
@@ -1211,4 +1204,4 @@ This document captures the available confirmed project decisions and identifies 
 
 Before this draft becomes the final requirements baseline, reconcile its content against the original numbered functional and non-functional requirements lists. Preserve the established IDs and meanings, including FR-055, and update any related acceptance criteria that conflict with the single-form requirement.
 
-**Document status:** Draft for review; not yet approved as the final numbered requirements baseline.
+**Document status:** Working baseline pending final owner approval; not yet confirmed as the final approved requirements baseline.

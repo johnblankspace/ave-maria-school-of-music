@@ -65,6 +65,7 @@ The source requirements identify these widths for testing:
 | 425 px | Larger mobile |
 | 768 px | Tablet |
 | 1024 px | Desktop/small laptop |
+| 1440 px | Wide desktop |
 
 Also test wider screens and intermediate widths where the layout changes.
 
