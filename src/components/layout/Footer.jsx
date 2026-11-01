@@ -1,5 +1,5 @@
-import logoWhite from '../../assets/logo/logo-white.png';
-import { MessageCircle, MapPin, Music } from 'lucide-react';
+import logoBlue from '../../assets/logo/logo-blue.png';
+import { MessageCircle, MapPin, ExternalLink } from 'lucide-react';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -33,29 +33,23 @@ function FacebookIcon({ className = 'h-5 w-5', ...props }) {
   );
 }
 
-export default function Footer() {
+export default function Footer({ onOpenLoginModal }) {
   return (
-    <footer className="bg-deep-navy text-mist-grey border-t border-royal-navy">
+    <footer className="border-t border-border-grey/70 bg-white text-dark-slate">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Introduction */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
+            <a href="/" className="inline-block" aria-label="Ave Maria School of Music - Home">
               <img
-                src={logoWhite}
+                src={logoBlue}
                 alt="Ave Maria School of Music"
-                className="h-10 w-auto object-contain sm:h-12"
+                className="h-14 w-14 shrink-0 aspect-square object-contain translate-y-[13%]"
               />
-              <div className="flex flex-col">
-                <span className="text-lg font-bold text-white tracking-tight">Ave Maria</span>
-                <span className="-mt-1 text-xs font-medium uppercase tracking-wider text-soft-blue">
-                  School of Music
-                </span>
-              </div>
-            </div>
-            <p className="text-sm leading-relaxed text-mist-grey/80">
-              One-to-one online Keyboard and Guitar lessons for children and adults. Personalized
-              instruction with flexible scheduling for students in India and worldwide.
+            </a>
+            <p className="text-sm leading-relaxed text-slate-grey">
+              Online Keyboard &amp; Guitar classes for children and adults. Trinity College London
+              syllabus with personalized guidance, flexible timings, and a supportive learning environment.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
@@ -63,7 +57,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Connect with Ave Maria School of Music on WhatsApp"
-                className="rounded-lg bg-royal-navy p-2.5 text-white transition-colors hover:bg-steel-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-blue min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-mist-grey text-royal-navy transition-colors hover:bg-ice-blue hover:text-royal-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue"
               >
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
               </a>
@@ -72,7 +66,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit Ave Maria School of Music on YouTube"
-                className="rounded-lg bg-royal-navy p-2.5 text-white transition-colors hover:bg-steel-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-blue min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-mist-grey text-royal-navy transition-colors hover:bg-ice-blue hover:text-royal-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue"
               >
                 <YoutubeIcon className="h-5 w-5" />
               </a>
@@ -81,7 +75,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visit Ave Maria School of Music on Facebook"
-                className="rounded-lg bg-royal-navy p-2.5 text-white transition-colors hover:bg-steel-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-blue min-h-[44px] min-w-[44px] flex items-center justify-center"
+                className="flex h-10 w-10 items-center justify-center rounded-lg bg-mist-grey text-royal-navy transition-colors hover:bg-ice-blue hover:text-royal-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue"
               >
                 <FacebookIcon className="h-5 w-5" />
               </a>
@@ -90,14 +84,14 @@ export default function Footer() {
 
           {/* Quick Navigation Links */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-ice-blue uppercase">
-              Navigation
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-royal-navy">
+              Quick Links
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
+            <ul className="mt-4 space-y-2.5 text-sm text-slate-grey">
               <li>
                 <a
                   href="#hero"
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
                 >
                   Home
                 </a>
@@ -105,88 +99,98 @@ export default function Footer() {
               <li>
                 <a
                   href="#courses"
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
                 >
-                  Keyboard & Guitar Courses
+                  Courses
                 </a>
               </li>
               <li>
                 <a
                   href="#about"
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
                 >
-                  About Tutor & Performance
+                  About Tutor
                 </a>
               </li>
               <li>
                 <a
                   href="#process"
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
                 >
-                  Our Teaching Process
+                  Our Process
                 </a>
               </li>
               <li>
                 <a
-                  href="#certification"
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
+                  href="#specialized-courses"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
                 >
-                  Syllabus & Certification
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#faq"
-                  className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
-                >
-                  Frequently Asked Questions
+                  Specialized Courses
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Courses & Learning Format */}
+          {/* Support & Portal Links */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-ice-blue uppercase">
-              Online Learning
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-royal-navy">
+              Support
             </h3>
-            <ul className="mt-4 space-y-2.5 text-sm">
-              <li className="flex items-center gap-2">
-                <Music className="h-4 w-4 text-steel-blue shrink-0" aria-hidden="true" />
-                <span>One-to-One Keyboard Classes</span>
+            <ul className="mt-4 space-y-2.5 text-sm text-slate-grey">
+              <li>
+                <a
+                  href="#faq"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
+                >
+                  Frequently Asked Questions
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Music className="h-4 w-4 text-steel-blue shrink-0" aria-hidden="true" />
-                <span>One-to-One Guitar Classes</span>
+              <li>
+                <a
+                  href="#inquiry"
+                  className="transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
+                >
+                  Contact &amp; Trial Booking
+                </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Music className="h-4 w-4 text-steel-blue shrink-0" aria-hidden="true" />
-                <span>4 Classes / Student / Month</span>
+              <li>
+                <button
+                  type="button"
+                  onClick={onOpenLoginModal}
+                  className="text-left transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue cursor-pointer"
+                >
+                  Student / Admin Login
+                </button>
               </li>
-              <li className="flex items-center gap-2">
-                <Music className="h-4 w-4 text-steel-blue shrink-0" aria-hidden="true" />
-                <span>30–45 Minutes Per Session</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Music className="h-4 w-4 text-steel-blue shrink-0" aria-hidden="true" />
-                <span>English & Malayalam Guidance</span>
+              <li>
+                <a
+                  href="https://wa.me/918301062755"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
+                >
+                  <span>Direct Help on WhatsApp</span>
+                  <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider text-ice-blue uppercase">
-              Get in Touch
+            <h3 className="text-xs font-semibold tracking-wider uppercase text-royal-navy">
+              Contact Us
             </h3>
-            <div className="mt-4 space-y-3 text-sm">
+            <div className="mt-4 space-y-3.5 text-sm text-slate-grey">
               <div className="flex items-start gap-2.5">
                 <MessageCircle className="h-5 w-5 text-steel-blue shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <span className="block text-xs text-soft-blue">WhatsApp Support</span>
+                  <span className="block text-xs font-medium text-slate-grey">Chat on WhatsApp</span>
                   <a
                     href="https://wa.me/918301062755"
-                    className="font-medium text-white hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ice-blue"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-deep-navy hover:text-royal-navy hover:underline focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-steel-blue"
                   >
                     +91 83010 62755
                   </a>
@@ -196,17 +200,17 @@ export default function Footer() {
               <div className="flex items-start gap-2.5">
                 <MapPin className="h-5 w-5 text-steel-blue shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
-                  <span className="block text-xs text-soft-blue">Class Format</span>
-                  <span className="text-white">Online via Zoom worldwide</span>
+                  <span className="block text-xs font-medium text-slate-grey">Class Format</span>
+                  <span className="font-medium text-deep-navy">Online Classes (Global Time Zones via Zoom)</span>
                 </div>
               </div>
 
               <div className="pt-2">
                 <a
                   href="#inquiry"
-                  className="inline-flex items-center justify-center rounded-lg bg-steel-blue px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-soft-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ice-blue min-h-[44px]"
+                  className="inline-flex items-center justify-center rounded-lg bg-royal-navy px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-steel-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-[44px]"
                 >
-                  Book Free Trial Class
+                  Book a Free Trial Class
                 </a>
               </div>
             </div>
@@ -214,17 +218,17 @@ export default function Footer() {
         </div>
 
         {/* Disclaimer & Copyright */}
-        <div className="mt-12 border-t border-royal-navy pt-8 text-xs leading-relaxed text-mist-grey/60">
-          <p className="mb-3">
+        <div className="mt-12 border-t border-border-grey/70 pt-8 text-xs leading-relaxed text-slate-grey">
+          <p className="mb-3 max-w-4xl">
             <strong>Syllabus Alignment Notice:</strong> Lessons are structured following guidance
-            from the Trinity College London syllabus to support structured musical development.
+            from the Trinity College London syllabus to support systematic musical development.
             School-issued digital certificates represent completion of internal school learning
-            milestones and do not constitute official Trinity College London accreditation or
-            diploma certification.
+            milestones and do not imply official Trinity College London accreditation or
+            endorsement.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
             <p>© {CURRENT_YEAR} Ave Maria School of Music. All rights reserved.</p>
-            <p className="text-mist-grey/40">Domain: avemariaschoolofmusic.com</p>
+            <p className="text-slate-grey/80">Personalized one-to-one online music education</p>
           </div>
         </div>
       </div>

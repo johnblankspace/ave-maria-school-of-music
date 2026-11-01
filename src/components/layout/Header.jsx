@@ -53,16 +53,18 @@ export default function Header({ onOpenLoginModal }) {
 
   return (
     <header className="sticky top-0 z-30 w-full border-b border-border-grey/60 bg-white/95 backdrop-blur-md transition-all">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 sm:py-2.5 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-5 md:px-4 lg:px-8 sm:py-2.5">
         {/* Brand Logo */}
         <a
           href="/"
           onClick={(e) => {
             closeMenus();
-
-            if (window.location.pathname === '/' && !window.location.hash) {
+            if (window.location.pathname === '/') {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (window.location.hash) {
+                window.history.pushState(null, '', '/');
+              }
             }
           }}
           className="flex shrink-0 items-center rounded-lg transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue"
@@ -79,6 +81,16 @@ export default function Header({ onOpenLoginModal }) {
         <nav className="hidden items-center gap-1 md:flex lg:gap-2" aria-label="Main navigation">
           <a
             href="#hero"
+            onClick={(e) => {
+              closeMenus();
+              if (window.location.pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (window.location.hash) {
+                  window.history.pushState(null, '', '/');
+                }
+              }
+            }}
             className="whitespace-nowrap rounded-md px-2 py-2 text-xs font-medium text-dark-slate transition-colors hover:text-royal-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue lg:px-3 lg:text-sm"
           >
             Home
@@ -150,18 +162,18 @@ export default function Header({ onOpenLoginModal }) {
         </nav>
 
         {/* Action Controls & Primary CTA */}
-        <div className="hidden items-center gap-2 md:flex lg:gap-3">
+        <div className="hidden items-center gap-1.5 md:flex lg:gap-3 shrink-0">
           <button
             type="button"
             onClick={onOpenLoginModal}
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 py-2 text-xs font-medium text-royal-navy transition-colors hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue cursor-pointer lg:px-3 lg:text-sm"
+            className="flex items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-xs font-medium text-royal-navy transition-colors hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue cursor-pointer lg:gap-1.5 lg:px-3 lg:text-sm"
             aria-label="Student and admin login information"
           >
             <LogIn className="h-4 w-4" aria-hidden="true" />
             <span>Login</span>
           </button>
 
-          <Button href="#inquiry" variant="primary" size="sm" className="whitespace-nowrap text-xs lg:text-sm">
+          <Button href="#inquiry" variant="primary" size="sm" className="whitespace-nowrap text-xs px-2.5 py-1.5 lg:px-3.5 lg:text-sm">
             Book a Free Trial Class
           </Button>
         </div>
@@ -197,7 +209,16 @@ export default function Header({ onOpenLoginModal }) {
               <a
                 key={link.name}
                 href={link.href}
-                onClick={closeMenus}
+                onClick={(e) => {
+                  closeMenus();
+                  if (link.name === 'Home' && window.location.pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    if (window.location.hash) {
+                      window.history.pushState(null, '', '/');
+                    }
+                  }
+                }}
                 className="block rounded-lg px-3 py-2.5 text-base font-medium text-dark-slate hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-[44px] flex items-center"
               >
                 {link.name}

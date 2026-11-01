@@ -26,7 +26,7 @@ export default function Layout({ children }) {
       </main>
 
       {/* Main Footer */}
-      <Footer />
+      <Footer onOpenLoginModal={() => setIsLoginModalOpen(true)} />
 
       {/* Floating WhatsApp Action Button */}
       <WhatsAppButton />
