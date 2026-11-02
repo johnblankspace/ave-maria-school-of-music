@@ -7,6 +7,10 @@
 
 This document defines the visual and interaction rules for the public website and later application. Requirements and business rules remain in `docs/requirements.md`; architecture is in `docs/architecture.md`.
 
+The design system applies to the entire intended website and later application, but it does not define the implementation sequence. Design consistency must be maintained as features are built incrementally.
+
+For each development task, apply the relevant design rules only to the section or component within the approved task scope. Do not implement or redesign every page or homepage section simply because its design requirements are documented here. Follow `docs/implementation-plan.md` for task sequencing and `docs/requirements.md` for feature scope and acceptance criteria.
+
 ## 2. Brand principles
 
 The interface should feel clear, welcoming, trustworthy, and suitable for music education for both children and adults. It should work well for families in India and overseas.
@@ -78,6 +82,23 @@ Rules:
 - Ensure dropdowns, dialogs, menus, and floating controls work with keyboard and touch input.
 - Do not hard-code page heights that clip translated or responsive content.
 
+### Incremental responsive verification
+
+Develop and verify responsive behaviour as part of each section's implementation task. Do not postpone all responsive work until the entire homepage has been built.
+
+Before considering a section task complete:
+
+- Test the section at the relevant supported viewport widths: 375, 425, 768, 1024, and 1440 px.
+- Check intermediate widths when they may reveal layout problems.
+- Verify that text, images, cards, buttons, and other controls fit without unintended overflow or clipping.
+- Check alignment, spacing, stacking, and readability at mobile, tablet, and desktop sizes.
+- Verify touch and keyboard interaction for any interactive elements affected by the change.
+- Recheck nearby or dependent sections if the change affects shared layout rules, global styles, or common components.
+
+Record any viewport that could not be tested and explain the limitation. Do not claim that responsive behaviour has been verified at a width that was not actually checked.
+
+Once the current section meets its responsive acceptance criteria, report the result and wait for the project owner's approval before moving to the next section.
+
 ## 6. Shared layout and navigation
 
 The public site uses a shared header and footer.
@@ -89,6 +110,22 @@ The public site uses a shared header and footer.
 - Do not add Student Performances to the initial public navigation.
 - Keep mobile navigation usable without hover.
 - When login functionality is not ready, do not make the Login entry point misleading; decide and document its interim behaviour.
+
+### Preserving shared layout components
+
+The shared header, navigation, and footer must remain consistent while individual homepage sections are implemented.
+
+For a section-specific task:
+
+- Do not redesign, replace, or restructure the shared header, navigation, or footer unless the approved task explicitly includes those elements.
+- Preserve existing navigation links, dropdown behaviour, responsive menu behaviour, and CTA destinations.
+- Preserve the single shared inquiry/free-trial form and its existing anchor navigation.
+- Do not introduce duplicate headers, footers, navigation menus, or inquiry forms.
+- Avoid changing global spacing, typography, or layout styles if the required section can be implemented using its existing styles and design tokens.
+- If a shared component or global style must change, explain why the change is necessary and identify the other sections that may be affected.
+- Verify the affected shared behaviour after making an approved change.
+
+A change to one homepage section must not cause unrelated changes to shared layout components.
 
 The final arrangement of every page/section should follow the approved information architecture and the actual implementation phase.
 
@@ -126,12 +163,31 @@ The homepage should present the approved sections and content in the order estab
 - Approved trust statistics only after verification.
 - Keyboard and Guitar lessons.
 - Specialized-course previews with accurate availability wording.
-- Tutor/About section and performance video.
+- Tutor/About section using the approved tutor photograph; the performance video is deferred from the first release.
 - Teaching process.
 - Genuine, approved testimonials/reviews.
 - Certification information with accurate wording.
 - FAQ.
 - One shared inquiry/free-trial form immediately before the footer.
+
+### Homepage design scope and implementation boundaries
+
+The section list above defines the intended content of the completed homepage. It does not require all sections to be implemented in a single development task.
+
+Follow `docs/implementation-plan.md` to determine which section or component is in scope for the current task.
+
+For each section task:
+
+- Apply the relevant visual and interaction rules from this document.
+- Use the approved content, assets, colours, typography, spacing, and component conventions.
+- Implement only the assigned section and the supporting changes necessary to complete it.
+- Do not build, redesign, or modify the remaining homepage sections unless they are explicitly included in the approved task.
+- Preserve the intended order of sections when integrating them into the completed homepage.
+- Reuse existing shared components and design tokens where appropriate.
+- Do not invent content, visual requirements, or business claims to fill gaps in the specification.
+- If a required design decision or asset is missing, identify the gap and ask for clarification when it materially affects the result.
+
+The completed homepage must eventually follow the approved requirements and design. However, each section must be implemented, verified, and reviewed independently before development proceeds to the next section.
 
 Student Performances are excluded from the initial public site.
 
@@ -139,15 +195,26 @@ Do not show a “Coming Soon” badge on specialized-course cards if the require
 
 ## 10. Tutor video
 
-The About/tutor section includes a performance video.
+The first public-website release must use the existing approved tutor photograph in the About/tutor section.
 
-- Request muted autoplay, inline playback, and looping.
-- Provide an accessible control for sound.
-- Use a poster image or loading fallback.
-- Avoid default controls if the approved design uses custom controls, but preserve a usable fallback and keyboard accessibility.
-- Respect reduced-motion preferences and browser autoplay restrictions.
-- Optimise the media so it does not unnecessarily block page rendering or consume excessive mobile data.
-- The exact source video and poster filenames must be verified in the repository; do not assume a proposed filename exists.
+### First-release requirements
+
+- Use the approved tutor photograph.
+- Display the image appropriately within the section's layout.
+- Optimise the image for web delivery.
+- Provide appropriate alternative text when the image conveys meaningful information.
+- Ensure the image displays correctly across supported viewport widths.
+- Do not invent or publish unverified information about the tutor.
+
+### Deferred performance video
+
+The tutor performance video is deferred and is not part of the first public-website release.
+
+Do not implement video playback, muted autoplay, looping, custom sound controls, video-specific loading behaviour, or video hosting integration as part of the current release.
+
+The video may be reconsidered in a future task only after the project owner explicitly approves its inclusion.
+
+If approved for a future release, review the video source, poster image, playback behaviour, accessibility, browser autoplay restrictions, reduced-motion preferences, loading performance, and mobile data usage before implementation.
 
 ## 11. Light and dark themes
 
@@ -184,6 +251,21 @@ Prefer central tokens for:
 - Focus rings and motion durations.
 
 Use React components for interactive or stateful UI. Use Tailwind utilities for local layout and styling, and use `@apply` only for genuinely repeated styling patterns where it improves maintainability. Follow the existing Tailwind CSS v4 setup.
+
+### Reuse of existing design tokens and components
+
+Before implementing a section, inspect the existing design tokens, shared components, styles, and Tailwind CSS v4 configuration.
+
+- Reuse existing colour, typography, spacing, radius, shadow, breakpoint, and focus-ring tokens whenever they meet the design requirements.
+- Reuse existing shared components when they provide the required behaviour and appearance.
+- Do not introduce new colour values, arbitrary spacing values, duplicate utility classes, or one-off component styles without a clear reason.
+- Do not create duplicate components that serve the same purpose as existing components.
+- Do not modify global design tokens or shared component styles merely to make one section easier to implement.
+- If a new token or shared component is genuinely necessary, explain the reason and check whether the change could affect existing sections.
+- Keep section-specific styling local when it is not genuinely reusable.
+- Follow the existing Tailwind CSS v4 setup and conventions. Do not introduce another styling system or replace the current configuration without explicit approval.
+
+After implementing a section, verify that its appearance is consistent with the existing design system and that any shared styles changed by the task have not unintentionally affected other sections.
 
 ## 14. Open design decisions
 

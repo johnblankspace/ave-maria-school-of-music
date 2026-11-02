@@ -19,6 +19,9 @@ For business rules, see `docs/requirements.md`. For visual rules, see `docs/desi
 6. Keep secrets out of client-side code.
 7. Make future family/guardian relationships possible without implementing family accounts in the first release.
 8. Document open decisions instead of inventing technical or business rules.
+9. Make the smallest coherent change necessary to satisfy the acceptance criteria of the current implementation task.
+10. Avoid unrelated refactoring, dependency changes, file moves, and redesigns unless they are necessary for the current task and explicitly approved.
+11. Implement one defined task at a time. After completing it, verify the changes, report the results, and wait for the project owner's approval before proceeding.
 
 ## 3. Intended technology stack
 
@@ -72,36 +75,189 @@ The later admin dashboard is intended to manage leads, students, courses/levels,
 
 Adapt this structure to the repository rather than moving or rewriting existing files without inspection.
 
-```text
+### 5.1 Frontend organisation principles
+
+Organise the frontend so that page composition, individual homepage sections, shared UI components, layout components, and content data have clear responsibilities.
+
+- **Pages:** Represent complete routes or page-level views and compose the components required by those views.
+- **Homepage sections:** Keep substantial homepage sections in separate components when doing so improves readability, maintainability, or independent implementation and testing.
+- **Shared layout components:** Place site-wide structural elements, such as the header, navigation, and footer, in the appropriate shared layout or navigation folders.
+- **Reusable UI components:** Keep genuinely reusable elements, such as buttons, badges, cards, and form controls, in the shared UI area when their reuse justifies it.
+- **Feature-specific components:** Keep components that serve only one feature or section within that feature's folder unless there is a clear reason to share them.
+- **Content data:** Separate repeated or structured content, such as course lists, FAQs, and testimonials, from rendering logic when it makes the implementation easier to maintain.
+- **Styles and assets:** Follow the existing styling conventions and asset organisation. Avoid creating duplicate styles, moving assets unnecessarily, or introducing another styling system.
+
+Adapt these principles to the repository's actual structure. Inspect existing files before creating new ones, and do not reorganise the project solely to match this example.
+
 src/
-  app/
-    App.jsx
-    router.jsx
-  assets/
-  components/
-    layout/
-    navigation/
-    ui/
-    forms/
-  features/
-    home/
-    courses/
-    about/
-    process/
-    testimonials/
-    faq/
-    inquiry/
-    auth/              # later phase
-    student/           # later phase
-    admin/             # later phase
-  hooks/
-  lib/
-    supabaseClient.js  # only if/when configured
-  styles/
-    index.css
-  utils/
-  main.jsx
-```
+├── app/
+│   ├── App.jsx
+│   ├── router.jsx
+│   └── providers/
+│       └── AppProviders.jsx
+│
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+│
+├── components/
+│   ├── layout/
+│   │   ├── SiteHeader.jsx
+│   │   ├── SiteFooter.jsx
+│   │   └── MainLayout.jsx
+│   │
+│   ├── navigation/
+│   │   └── NavigationMenu.jsx
+│   │
+│   ├── ui/
+│   │   ├── Button.jsx
+│   │   ├── Container.jsx
+│   │   ├── SectionHeading.jsx
+│   │   ├── Input.jsx
+│   │   ├── Select.jsx
+│   │   ├── Textarea.jsx
+│   │   ├── Modal.jsx
+│   │   └── Spinner.jsx
+│   │
+│   ├── forms/
+│   │   └── FormField.jsx
+│   │
+│   └── feedback/
+│       ├── ErrorMessage.jsx
+│       ├── SuccessMessage.jsx
+│       └── EmptyState.jsx
+│
+├── features/
+│   ├── home/
+│   │   ├── pages/
+│   │   │   └── HomePage.jsx
+│   │   ├── components/
+│   │   │   ├── HeroSection.jsx
+│   │   │   ├── TrustSection.jsx
+│   │   │   ├── CoursesSection.jsx
+│   │   │   ├── AboutSection.jsx
+│   │   │   ├── ProcessSection.jsx
+│   │   │   ├── TestimonialsSection.jsx
+│   │   │   ├── SpecializedCoursesSection.jsx
+│   │   │   ├── CertificationSection.jsx
+│   │   │   └── FAQSection.jsx
+│   │   └── data/
+│   │       └── homeContent.js
+│   │
+│   ├── courses/
+│   │   ├── pages/
+│   │   │   ├── CoursesPage.jsx
+│   │   │   ├── KeyboardPage.jsx
+│   │   │   └── GuitarPage.jsx
+│   │   ├── components/
+│   │   │   ├── CourseCard.jsx
+│   │   │   └── CourseDetails.jsx
+│   │   └── data/
+│   │       └── courses.js
+│   │
+│   ├── about/
+│   │   ├── pages/
+│   │   │   └── AboutPage.jsx
+│   │   └── components/
+│   │       └── TutorProfile.jsx
+│   │
+│   ├── process/
+│   │   ├── pages/
+│   │   │   └── ProcessPage.jsx
+│   │   └── components/
+│   │
+│   ├── testimonials/
+│   │   ├── components/
+│   │   └── data/
+│   │       └── testimonials.js
+│   │
+│   ├── faq/
+│   │   ├── pages/
+│   │   │   └── FAQPage.jsx
+│   │   └── data/
+│   │       └── faqs.js
+│   │
+│   ├── inquiry/
+│   │   ├── components/
+│   │   │   └── InquiryForm.jsx
+│   │   ├── schemas/
+│   │   │   └── inquirySchema.js
+│   │   └── services/
+│   │       └── inquiryService.js
+│   │
+│   ├── auth/                 # Later phase
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── schemas/
+│   │   └── services/
+│   │
+│   ├── student/              # Later phase
+│   │   ├── pages/
+│   │   ├── components/
+│   │   └── services/
+│   │
+│   └── admin/                # Later phase
+│       ├── pages/
+│       ├── components/
+│       └── services/
+│
+├── hooks/
+│
+├── lib/
+│   └── supabase/
+│       └── client.js         # Only if/when configured
+│
+├── config/
+│   ├── site.js
+│   └── navigation.js
+│
+├── constants/
+│   ├── routes.js
+│   └── appConstants.js
+│
+├── styles/
+│   └── index.css
+│
+├── utils/
+│
+└── main.jsx
+
+
+public/
+├── images/
+│   ├── branding/
+│   ├── home/
+│   ├── courses/
+│   └── tutor/
+├── icons/
+└── favicon.svg
+
+
+supabase/                      # Add when backend development begins
+├── migrations/
+└── functions/
+
+
+tests/                         # Add when testing is introduced
+
+### 5.2 Homepage composition
+
+`HomePage.jsx` should assemble the homepage by importing and arranging the required section components in the approved order.
+
+It should not contain the complete implementation details of every homepage section.
+
+Responsibilities:
+
+- `HomePage.jsx` is responsible for the overall composition and order of homepage sections.
+- Each substantial homepage section should have its own component when separation improves maintainability or allows the section to be implemented and tested independently.
+- Shared elements, such as the header, navigation, and footer, should use the appropriate existing shared components.
+- Repeated content should use data-driven rendering where it improves clarity and avoids unnecessary duplication.
+- Section-specific content, interactions, and styling should remain with the relevant section or feature unless they genuinely belong in a shared component.
+
+Do not create every possible component in advance. Build only the components required for the current task and its approved dependencies.
+
+When implementing a single homepage section, modify `HomePage.jsx` only if necessary to integrate that section. Do not implement the remaining sections as part of the same task.
 
 Guidelines:
 - Keep components cohesive and avoid creating abstractions before repeated use justifies them.
@@ -110,9 +266,38 @@ Guidelines:
 - Avoid placing secret-dependent operations in browser code.
 - Keep the single inquiry form as one source of truth; CTA links should target it rather than create duplicate forms.
 
+### 5.3 Component creation and reuse
+
+Create a separate component when it has a clear responsibility and separation provides a practical benefit, such as easier maintenance, independent testing, reuse, or a smaller parent component.
+
+Use these guidelines:
+
+- **Section-specific components:** Keep components that are used only by one homepage section within that section's feature area when practical.
+- **Shared components:** Promote a component to the shared UI or layout area when it is genuinely reused or has a clear application-wide responsibility.
+- **Repeated UI patterns:** Consider extracting repeated markup into a reusable component when doing so reduces duplication without making the implementation harder to understand.
+- **Small elements:** Keep simple markup local to its parent component when extracting it would add unnecessary complexity.
+- **Component size:** Split components when they have too many unrelated responsibilities or become difficult to read, test, or maintain. Do not use an arbitrary line-count limit as the only reason to split a component.
+- **Existing components:** Reuse appropriate components before creating duplicates. If a shared component must change, check its existing usage and potential impact on other sections.
+- **Component scope:** Do not refactor unrelated components or introduce a new abstraction as part of a section task unless it is necessary to meet that task's acceptance criteria.
+
+The objective is a clear, maintainable component structure—not the maximum possible number of components.
+
 ## 6. Routing principles
 
 Use React Router DOM if consistent with the existing app. Exact public URL slugs must be checked against the approved sitemap and implementation before finalising.
+
+### Homepage section work and route stability
+
+Implementing or modifying an individual homepage section must not trigger unnecessary changes to the application's routing.
+
+- Preserve the existing routes, route configuration, navigation behaviour, and URL structure unless the current task explicitly requires an approved routing change.
+- Do not create a separate route for a homepage section merely because that section has its own React component.
+- Keep homepage sections within the homepage route unless the approved sitemap and requirements specify a separate page.
+- Do not modify `App.jsx`, `router.jsx`, or other routing files when the requested section can be implemented without changing them.
+- If routing changes are necessary, explain why they are required and identify the affected routes before making changes.
+- Verify existing navigation and relevant routes after any approved routing change.
+
+A component is not automatically a page. Component organisation and route organisation serve different purposes.
 
 Likely public information areas include Home, Courses, About, Our Process, Certification, FAQ, and the shared inquiry anchor. These names describe information architecture, not a mandate to create every route as a separate page. The source requirements include a Courses dropdown and a single homepage contact form.
 
@@ -176,7 +361,7 @@ Do not commit secrets or real student data. Confirm the repository's `.gitignore
 | WhatsApp | Direct contact and admin follow-up | Floating link is confirmed; automated admin notification mechanism is unresolved |
 | Zoom | Online classes | Private class link must be protected |
 | Supabase | Planned auth, database, storage, backend operations | Apply least privilege and RLS |
-| YouTube/video hosting | Tutor performance video or public channel | Exact source/file and performance strategy must be verified |
+| YouTube/video hosting | Potential future tutor performance video or public channel | Performance video is deferred from the first release; reconsider only after explicit project-owner approval |
 | Facebook | Public social presence | Use approved official profile URL |
 | Payment gateway | None specified | Do not build an automated gateway by assumption |
 
@@ -199,6 +384,28 @@ At minimum, verify:
 - Class-link access before and after the allowed window, once the full window policy is approved.
 - Private storage and certificate access restrictions.
 - Build and lint/test commands that actually exist in `package.json`.
+
+### Task-level verification and regression checks
+
+Verification must be appropriate to the scope of the current implementation task. Do not require the entire application to be complete before an individual task can be verified.
+
+For each homepage section task:
+
+1. **Verify the requested section:** Check its required content, layout, interactions, and acceptance criteria against `docs/requirements.md` and the task definition.
+2. **Check responsive behaviour:** Test the relevant supported viewport widths, particularly those affected by the change.
+3. **Check accessibility:** Verify relevant semantic HTML, keyboard interaction, accessible names, alternative text, and focus behaviour.
+4. **Check shared dependencies:** If a shared component, global stylesheet, or common utility was changed, verify the affected existing sections and components that depend on it.
+5. **Check regression risk:** Confirm that unrelated homepage sections, navigation, routes, forms, and shared functionality have not been unintentionally changed.
+6. **Run appropriate project checks:** Use the build, lint, and test commands that actually exist in `package.json`. Report commands that cannot be run and explain why.
+7. **Report the result:** Summarise the implemented changes, files modified, checks performed, failures, and unresolved issues.
+
+Do not claim that a test passed unless it was actually run and passed.
+
+If the task changes only an isolated section and does not affect shared functionality, do not expand the scope into unnecessary testing or refactoring of unrelated features.
+
+If a change to a shared component causes a regression, fix the regression within the approved scope or report the issue and request approval if a broader change is needed.
+
+After verification, stop and wait for the project owner's review and approval before starting the next implementation task.
 
 Do not use real student personal information in test fixtures.
 

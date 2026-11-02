@@ -9,6 +9,8 @@ SEO applies first to the public marketing website. Private student/admin pages a
 
 The site's business goal is to help prospective students and parents discover online Keyboard and Guitar lessons and submit an inquiry/free-trial request. SEO must support this goal without publishing unverified claims.
 
+SEO requirements must be implemented incrementally according to `docs/implementation-plan.md`. Documenting an SEO requirement does not authorize implementing every SEO feature at once. Implement only the SEO work relevant to the current approved task, and defer work that depends on unresolved decisions.
+
 ## 2. Source of truth
 
 - Business content and scope: `docs/requirements.md`
@@ -30,6 +32,11 @@ Each indexable public page should have:
 - Social sharing metadata (Open Graph and, where appropriate, X/Twitter card metadata) using approved titles, descriptions, and images.
 - Descriptive image alternative text where images convey information; decorative images should use empty alt text.
 - Descriptive internal link text rather than repeated vague labels.
+
+- Implement metadata only for routes that actually exist or are included in the current approved task.
+- Do not invent production URLs, canonical URLs, page titles, descriptions, or social-sharing image paths.
+- Until the production domain and route map are approved, keep canonical URL configuration pending rather than publishing guessed canonical URLs.
+- Keep metadata configuration maintainable and avoid duplicating conflicting metadata across shared components and individual pages.
 
 Do not stuff keywords or reuse one generic title/description on every page.
 
@@ -65,6 +72,8 @@ These are content areas, not a final URL map. Confirm the final page/route struc
 
 Specialized-course previews must describe actual availability accurately. Do not present future free courses, including Malayalam Holy Mass songs, as currently available unless confirmed. Do not include Student Performances in the initial public navigation.
 
+The proposed information architecture defines content areas, not a single implementation task. Implement homepage sections individually according to `docs/implementation-plan.md`. Do not create new routes solely for SEO purposes without approval. Keep the shared inquiry/free-trial form on the homepage unless the project owner explicitly approves a change.
+
 ## 6. Technical SEO and rendering
 
 React/Vite is the current frontend stack. The choice between client-side rendering, prerendering, or another rendering approach remains open and should be made after reviewing the public-page requirements and deployment constraints.
@@ -81,6 +90,14 @@ At minimum:
 - Prevent accidental indexing of staging/preview environments where feasible.
 - Do not expose private student/admin routes, private files, API keys, or records in public bundles.
 - Do not rely on `robots.txt` as an access-control mechanism.
+
+### Rendering and deployment decision gate
+
+- Do not introduce prerendering, static generation, server-side rendering, or additional SEO dependencies without evaluating the existing React/Vite setup and obtaining approval for the approach.
+- Before implementing a sitemap, confirm the approved public route map and the chosen rendering and deployment strategy.
+- Keep preview and development URLs out of production canonical metadata.
+- Apply the appropriate indexing controls to staging environments and private routes. Use authentication and server-side authorization to protect private content; metadata and crawler directives are not security controls.
+- Verify the rendered page output and metadata using the chosen implementation and deployment approach rather than assuming that the presence of React components guarantees search-engine discoverability.
 
 ## 7. Structured data
 
@@ -102,7 +119,7 @@ Whether a local-business schema is appropriate depends on whether the school has
 - Compress images without visibly damaging quality.
 - Set width/height or aspect ratio to reduce layout shift.
 - Lazy-load below-the-fold images when appropriate; do not lazy-load the main hero asset if it harms perceived loading.
-- Optimise the tutor performance video and provide a poster/fallback.
+- - Use the approved tutor photograph in the About section for the first public release. Optimise the image, provide appropriate dimensions and responsive variants where useful, and use meaningful alternative text when the image conveys information. Defer tutor video optimisation and integration until a later phase is explicitly approved.
 - Avoid unnecessary third-party scripts and fonts.
 - Load only the Poppins weights actually used.
 - Monitor layout stability and mobile performance.
@@ -144,6 +161,17 @@ Before launch, once the production domain is approved:
 - Set up search-engine webmaster tools only with the owner's approval and access.
 - Monitor indexing and errors after launch.
 
+### SEO verification during development
+
+For each public page or SEO-related task:
+
+- Verify the page title, meta description, primary heading, and relevant metadata.
+- Check internal links, image alternative text, and responsive behaviour where applicable.
+- Confirm that metadata and canonical URLs do not contain invented production URLs.
+- Check that the implementation does not unintentionally expose private information or indexable private pages.
+- Run the relevant checks supported by the current project setup and report their actual results.
+- Do not mark the entire site's SEO as complete until the approved public routes, production domain, rendering strategy, and launch checklist have been addressed.
+
 ## 12. Open SEO decisions
 
 - Final public route/slug map.
@@ -154,3 +182,4 @@ Before launch, once the production domain is approved:
 - Whether the business qualifies for local-business structured data.
 - Final verified public claims, testimonials, tutor qualifications, and course availability.
 - Whether country-specific content is needed after keyword and audience research.
+- SEO implementation priorities and any additional technical SEO work must follow the approved implementation plan; do not introduce new SEO scope without approval.

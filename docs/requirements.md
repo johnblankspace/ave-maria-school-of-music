@@ -13,6 +13,16 @@ This document defines the business goals, users, functional requirements, non-fu
 
 It is the requirements reference for development. Implementation details belong in `docs/architecture.md`, visual rules belong in `docs/design-system.md`, and delivery sequencing belongs in `docs/implementation-plan.md`.
 
+### Implementation scope and task boundaries
+
+This document defines the complete intended product, including confirmed requirements, future phases, exclusions, and unresolved decisions. Documenting a feature does not authorize its immediate implementation.
+
+For each development task, use `docs/implementation-plan.md` to determine the current task, its scope, and its acceptance criteria. Implement only the features and changes assigned to that task.
+
+Do not implement the entire homepage, all application features, or multiple future phases simply because they are described in this document. Complete the current task, verify it, report the results, and wait for approval before proceeding to the next task.
+
+If the implementation plan conflicts with a confirmed business requirement, do not silently discard either instruction. Identify the conflict and request clarification before making a decision that changes the intended product.
+
 ### Requirement status definitions
 
 | Status | Meaning |
@@ -138,6 +148,25 @@ The system should avoid unnecessary complexity while allowing reasonable future 
 
 ### 4.1 First release: Public website
 
+#### Release scope and implementation boundaries
+
+The first release is the public website and its agreed enquiry journey. The requirements in this document describe the complete intended product, not a command to implement every feature in one development task.
+
+The first release includes the public-facing website features listed in this section, subject to the confirmed decisions and unresolved items documented in this file.
+
+The following functionality belongs to later phases and must not be implemented as part of the public-website release unless the project owner explicitly approves a scope change:
+
+- Student authentication and the student dashboard.
+- Admin authentication and the admin panel.
+- Student, class, attendance, and payment management.
+- Protected study-material delivery.
+- Certificate management.
+- Paid digital-course purchases and a complete learning management system.
+
+Within the first release, homepage sections must also be implemented incrementally according to `docs/implementation-plan.md`. Inclusion in the approved homepage does not mean every section must be built in a single task.
+
+Before starting a task, identify its release, scope, dependencies, and acceptance criteria. Do not add unrelated sections, pages, integrations, or future-phase functionality without approval.
+
 The first release focuses on the public website and trial-class enquiry journey.
 
 It includes:
@@ -145,7 +174,7 @@ It includes:
 - Public homepage and navigation.
 - Keyboard and guitar course information.
 - Tutor/about content.
-- The tutor's performance video.
+- Tutor/About content using the existing approved tutor photograph. The performance video is deferred and is not required for the first release.
 - Information about the teaching process.
 - What We Offer content.
 - Testimonials, subject to verification and publication permission.
@@ -250,14 +279,30 @@ The agreed homepage sequence is:
 2. Hero section.
 3. Trust statistics.
 4. Courses.
-5. Tutor/About section, including the performance video.
-6. What We Offer.
+5. Specialized-course previews.
+6. Tutor/About section, including the performance video.
 7. Our Process.
 8. Testimonials.
-9. Specialized-course previews.
-10. FAQs.
-11. Single Free Trial Class Booking Form.
-12. Footer.
+9.  FAQs
+10. Single Free Trial Class Booking Form.
+11. Footer.
+
+#### Homepage implementation boundaries
+
+The sequence above defines the complete intended homepage order. It does not require all sections to be implemented in one task.
+
+Implement the homepage incrementally according to `docs/implementation-plan.md`. Each task must identify the specific section or component being implemented, its dependencies, and its acceptance criteria.
+
+During an individual section task:
+
+- Implement only the section and the supporting changes required for that task.
+- Reuse existing shared components and design-system rules where appropriate.
+- Do not implement the remaining homepage sections simply because they appear in the sequence above.
+- Do not redesign or rewrite completed sections unless the current task requires it and the change is approved.
+- Preserve the intended section order when assembling the completed homepage.
+- Do not add the deferred tutor performance video to the first release. Use the approved tutor photograph instead.
+
+The completed homepage must eventually contain all approved sections in the order listed above, subject to the release boundaries and confirmed project decisions.
 
 The page must use consistent spacing, typography, colours, and component styles.
 
@@ -267,6 +312,30 @@ The page must use consistent spacing, typography, colours, and component styles.
 - The trial form appears immediately before the footer.
 - The homepage remains usable across the agreed responsive viewport widths.
 - Content and controls do not overlap or create unintended horizontal scrolling.
+
+#### Homepage section requirements and task definition
+
+Each homepage section must have a clearly defined purpose, required content, interactions where applicable, and acceptance criteria.
+
+The existing subsections in Section 5 define the requirements for the individual sections. Use those requirements when preparing the corresponding implementation task; do not copy the entire homepage specification into every task.
+
+Before implementing a section, the task definition must identify:
+
+1. **Task ID and section:** The specific section or component to implement.
+2. **Purpose:** What the section must communicate or help the visitor accomplish.
+3. **Required content:** The approved text, images, data, and other content that must be included.
+4. **Interactions:** The required buttons, links, animations, forms, or other behaviour, if applicable.
+5. **Dependencies:** Existing components, styles, assets, or functionality that the task relies on.
+6. **Acceptance criteria:** The conditions that must be satisfied before the task is considered complete.
+7. **Out of scope:** Sections, features, and files that must not be changed as part of the task, except where a necessary supporting change is approved.
+
+The task definition must use the relevant requirements and acceptance criteria already documented in this file. Do not invent business content or create new requirements to fill gaps.
+
+If required content, a dependency, or a business decision is unresolved, identify it before implementation. Ask for clarification when the unresolved item would materially affect the result.
+
+A task may modify a shared component when necessary, but it must identify the reason and assess the impact on other sections that use that component.
+
+Completing one section does not authorize implementation of the next section. Wait for the project owner's review and approval before proceeding.
 
 ### 5.3 Hero section
 
@@ -338,30 +407,28 @@ The website must also communicate that students are expected to have their own i
 
 The About section must introduce tutor Arun Antony and communicate verified information about his teaching experience and background.
 
-The section must include the tutor's performance video.
+The first release must use the existing approved tutor photograph. The photograph must be displayed appropriately within the section and optimised for web delivery.
 
-The video must feel integrated into the About section rather than presented as a conventional embedded video player.
+Remove any requirement specifying the "Trinity College London" badge/text below the tutor photograph in the hero section and the about section.
 
-Confirmed video requirements:
+Do not invent tutor qualifications, employment history, achievements, or other professional claims. Publish only information that has been verified and approved.
 
-- Muted autoplay where supported by the browser.
-- Inline playback on mobile devices.
-- Looping playback.
-- An accessible custom mute/unmute control.
-- A suitable poster image or fallback.
-- No standard video controls during normal playback, while retaining an accessible recovery mechanism if playback fails.
+#### Deferred performance video
 
-Autoplay cannot be guaranteed on every browser, device, or network. The experience must remain usable when autoplay is blocked.
+The tutor's performance video is deferred and is not part of the first public-website release.
 
-The video asset must be optimised and its production delivery approach evaluated before deployment.
+Do not implement video playback, autoplay, looping, custom video controls, or video-specific loading behaviour as part of the first release.
 
-**Acceptance criteria**
+The video may be reconsidered in a future task after the project owner explicitly approves its inclusion. At that time, its playback behaviour, accessibility, fallback, performance, and production delivery requirements must be reviewed before implementation.
 
-- The video is presented as part of the About section.
-- The user can control sound using an accessible control.
-- The page provides a meaningful fallback when video playback fails.
-- The video does not make the page unnecessarily slow.
+#### Acceptance criteria
+
+- The About section introduces the tutor using approved content.
+- The existing approved tutor photograph is used in the first release.
+- The photograph has appropriate alternative text when it conveys meaningful information.
+- The photograph is optimised and displayed correctly across supported viewport widths.
 - Tutor qualifications and employment history are published only when verified.
+- The deferred performance video is not implemented as part of the first release.
 
 ### 5.7 What We Offer and Our Process
 
@@ -1022,7 +1089,7 @@ The following decisions guide implementation but must not be confused with busin
 | Database security | Server-side authorisation and appropriate Row Level Security policies. | Required security direction; exact policies belong in the architecture/security design. |
 | Private materials | Private storage and authorised access. | Required outcome; exact configuration remains to be finalised. |
 | Class access | Server-side authorisation before returning private Zoom links. | Required security direction; exact mechanism remains to be designed. |
-| Video | Inline, muted autoplay, looping, custom sound control, and fallback. | Confirmed experience requirements; production delivery method unresolved. |
+| Video | Deferred from the first public-website release; the approved tutor photograph is used instead. | Deferred; reconsider only after explicit project-owner approval. |
 | Deployment | Publish the public website using an approved production configuration. | Required outcome; hosting arrangement unresolved. |
 
 Do not replace the existing stack or introduce additional libraries without a specific justification and approval.
@@ -1041,7 +1108,7 @@ Do not replace the existing stack or introduce additional libraries without a sp
 - The public website is the first implementation priority.
 - The Contact navigation item and trial-booking CTAs must lead to the single homepage trial form.
 - The application uses the existing JavaScript/React/Vite/Tailwind stack.
-- The tutor performance video belongs in the About section.
+- The About section uses the existing approved tutor photograph in the first release; the tutor performance video is deferred.
 - The student and admin functionality is planned for later development.
 
 ### 11.2 Assumptions requiring confirmation
@@ -1100,6 +1167,27 @@ Do not block unrelated work while an open question remains unresolved. Resolve e
 ## 13. Release Acceptance Criteria
 
 The first public release is acceptable when the following criteria are satisfied.
+
+### Task-level acceptance versus release-level acceptance
+
+The acceptance criteria in this section determine whether the complete first public-website release is ready for release. They are not requirements that every individual development task must satisfy independently.
+
+Each implementation task must define its own acceptance criteria based on the relevant requirements in this document.
+
+For an individual section task:
+
+- Verify the required content and behaviour of the assigned section.
+- Check responsive behaviour and accessibility where relevant.
+- Run the available project checks appropriate to the changes made.
+- Verify that the task has not introduced unintended changes to unrelated sections or shared functionality.
+- Report completed work, files changed, checks performed, and any unresolved issues.
+- Do not claim that the entire website or release is complete when only one section has been implemented.
+
+A section task may be considered complete when its own acceptance criteria are satisfied, even though other homepage sections remain unfinished.
+
+The complete public-website release must not be declared ready until all applicable release-level acceptance criteria have been satisfied.
+
+After completing a task, wait for the project owner's review and approval before starting the next task. Do not automatically proceed through the remaining implementation plan.
 
 ### Public website
 

@@ -9,6 +9,23 @@ Build and verify the project in small stages, beginning with the public website 
 
 A feature being listed in this plan does not mean it is implemented.
 
+### Task execution and approval boundaries
+
+This plan defines the implementation sequence for the complete project. It does not authorise the implementation of every task in a phase at once.
+
+Work on only one explicitly defined implementation task at a time. Each task must identify its scope, relevant requirements, dependencies, acceptance criteria, and exclusions.
+
+After completing a task:
+
+1. Verify the implemented changes against that task's acceptance criteria.
+2. Run the relevant available project checks.
+3. Report the files changed, checks performed, results, and unresolved issues.
+4. Stop and wait for the project owner's review and approval.
+
+Do not automatically proceed to the next task or implement additional sections, features, or phases without approval.
+
+A phase may contain multiple tasks and can remain incomplete while individual tasks are reviewed and approved.
+
 ## 2. Technology constraints
 
 Use the existing JavaScript/JSX, React, Vite, Tailwind CSS v4, React Router DOM, React Hook Form, Zod, Supabase client, and Lucide React stack. Do not introduce TypeScript, switch frameworks, or replace the styling/backend approach without an approved decision. Inspect the repository and `package.json` before assuming a dependency or script is available.
@@ -25,14 +42,19 @@ Use the existing JavaScript/JSX, React, Vite, Tailwind CSS v4, React Router DOM,
 8. Commit stable checkpoints using the repository's normal Git workflow.
 9. Update documentation when a decision changes.
 10. Do not store secrets or real student data in Git.
+11. Define each implementation task narrowly enough that its changes and acceptance criteria can be reviewed independently.
+12. Make the smallest coherent change necessary to satisfy the current task; avoid unrelated refactoring, redesigns, file moves, and dependency changes.
+13. Before coding, identify the specific section or component in scope and the files likely to be affected. Inspect the repository before assuming those files or components exist.
+14. Do not interpret a phase heading, complete section list, or future requirement as permission to implement all listed features in one task.
+15. After completing and verifying the current task, stop and wait for the project owner's explicit approval before starting another task.
 
 ## 4. Phase overview
 
 | Phase | Goal | Main deliverables | Gate to continue |
 |---|---|---|---|
 | 0. Documentation and repository baseline | Make project instructions consistent and understand current setup | Six Markdown docs; repository/config review | Owner reviews docs; no unresolved contradiction blocks the next phase |
-| 1. Public site foundation | Establish working React app shell and visual foundation | App shell, global styles, shared header/footer, responsive navigation | App runs/builds; navigation and layout checked |
-| 2. Public content pages/sections | Present the school's confirmed offerings and information | Hero, courses, About/video, process, approved testimonials, specialized previews, certification, FAQ | Content accuracy and responsive behaviour reviewed |
+| 1. Public site foundation | Establish working React app shell and visual foundation | App shell and global styles, followed by separately scoped tasks for shared header, footer, and responsive navigation | App runs/builds; navigation and layout checked |
+| 2. Public content pages/sections | Present the school's confirmed offerings and information | Individually implemented and reviewed homepage sections: hero, courses, About using the approved tutor photograph, process, approved testimonials, specialized previews, certification, and FAQ | Content accuracy and responsive behaviour reviewed |
 | 3. Shared inquiry journey | Complete the single form and contact path | One form before footer, validation, Contact/CTA anchors, WhatsApp link | Exactly one form; validation/accessibility checked; backend status is represented honestly |
 | 4. Public-site quality and launch | Prepare public site for release | SEO metadata, accessibility/performance checks, approved content, deployment | Hosting/domain/DNS decisions approved; production checks pass |
 | 5. Lead backend and admin lead management | Save and manage enquiries securely | Supabase integration, lead records, admin lead view/status | RLS, validation, spam handling, and admin authorization tested |
@@ -58,35 +80,99 @@ Acceptance criteria:
 
 ## 6. Phase 1 — Public site foundation
 
-Tasks:
-- Confirm the current app entry point and scripts.
-- Establish global typography, palette tokens, layout primitives, and responsive behaviour.
-- Build/review shared header, navigation, footer, and common button/link styles.
-- Ensure route and anchor structure supports the approved content.
-- Keep the initial phase free of incomplete student/admin backend features.
+Tasks must be executed individually, in order, with review and approval between tasks.
+
+1. Inspect the existing app entry point, `package.json`, scripts, routing setup, and current project structure. Report the findings without making unrelated code changes.
+2. Establish or verify the global typography, palette tokens, and base styles using the existing project configuration.
+3. Establish or verify the shared layout primitives needed by the public website.
+4. Implement or review the shared header and navigation as a separate task.
+5. Implement or review the shared footer as a separate task.
+6. Verify the responsive behaviour of the shared layout and navigation.
+7. Confirm that the existing route and anchor structure supports the approved homepage and the single inquiry/free-trial form.
+
+Do not combine these tasks into one large implementation unless the project owner explicitly approves a change to the task scope.
+
+Before each task, inspect the relevant existing files and identify the files expected to change. Preserve working code and avoid duplicating existing components.
+
+Keep the initial phase free of incomplete student/admin backend features.
 
 Acceptance criteria:
 - App starts and builds using the repository's actual scripts.
 - No horizontal overflow at 375, 425, 768, 1024, and 1440 px.
 - Keyboard focus and mobile navigation work.
 - Visual tokens come from `docs/design-system.md`.
+- Each foundation task is verified and approved independently before the next task begins.
 
 ## 7. Phase 2 — Public content
 
-Implement in small batches:
-1. Hero and primary/secondary CTAs.
-2. Keyboard and Guitar course information.
-3. Tutor/About section and video behaviour.
-4. Our Process and genuine approved testimonials.
-5. Specialized-course previews and accurate availability wording.
-6. Certification information and FAQ.
-7. Final content order and responsive polish.
+Implement the following tasks in order. Each numbered item is a separate implementation task, not a batch of tasks to execute together.
+
+### Task 2.1 — Hero section
+
+Implement only the hero section and its approved content, layout, and CTA behaviour.
+
+### Task 2.2 — Trust statistics
+
+Implement the trust-statistics section using only verified and approved statistics. If the content is not approved or verified, do not invent replacements.
+
+### Task 2.3 — Keyboard and Guitar courses
+
+Implement the course section and its approved Keyboard and Guitar information.
+
+### Task 2.4 — Tutor/About section
+
+Implement the About section using the approved tutor photograph and verified tutor information. Do not implement the deferred performance video.
+
+### Task 2.5 — Our Process section
+
+Implement the section explaining the approved teaching process.
+
+### Task 2.6 — Testimonials
+
+Implement the testimonials section using genuine, approved testimonials or reviews. Do not fabricate testimonials.
+
+### Task 2.7 — Specialized-course previews
+
+Implement the specialized-course previews using accurate, approved availability wording.
+
+### Task 2.8 — Certification information
+
+Implement the certification information using approved content and accurate wording.
+
+### Task 2.9 — FAQ section
+
+Implement the FAQ section using approved questions and answers.
+
+### Task 2.10 — Homepage integration review
+
+Review the order and integration of the completed sections against `docs/requirements.md`. Make only the integration changes necessary to preserve the approved order and layout. Do not use this task as an opportunity to redesign or rewrite completed sections.
+
+### Task execution rules
+
+- Complete only the current task.
+- Read the relevant requirements and design-system guidance before implementation.
+- Inspect existing components, styles, and assets before creating or replacing files.
+- Reuse appropriate existing components and design tokens.
+- Do not implement the next task automatically.
+- Verify the current section against its acceptance criteria and relevant responsive requirements.
+- Check for regressions in affected shared components.
+- Report the files changed, checks performed, results, and unresolved issues.
+- Stop and wait for the project owner's approval before beginning the next task.
+
+If a task depends on an unfinished shared component or an unresolved decision, identify the dependency and request clarification when necessary. Do not silently expand the task to include unrelated work.
 
 Acceptance criteria:
+
+- Each section satisfies its own approved content, layout, interaction, and accessibility requirements.
 - Claims, course availability, tutor credentials, statistics, and testimonials are verified and approved.
-- Student Performances does not appear in the initial public navigation/homepage.
-- Video has a fallback, muted inline autoplay request, looping, and sound control.
+- Student Performances does not appear in the initial public navigation or homepage.
+- The About section uses the approved tutor photograph; the performance video is deferred from the first release.
+- The homepage sections are integrated in the approved order.
 - No CTA points to a duplicate form or dead destination.
+- The current section is tested at the relevant supported viewport widths before its task is considered complete.
+- Changes to shared components are checked for regressions in affected sections.
+- Each task is reviewed and approved before the next task begins.
+- Phase 2 is not considered complete until all its applicable acceptance criteria are satisfied.
 
 ## 8. Phase 3 — Single inquiry/free-trial form
 
@@ -206,6 +292,27 @@ For each relevant release:
 - No secrets or student personal information are committed or exposed.
 - Protected data is checked with both authorised and unauthorised test users.
 - Documentation reflects the actual implementation and known limitations.
+
+### Individual task verification
+
+Before marking an implementation task complete, verify the following as applicable to its scope:
+
+- The requested feature or section satisfies its own acceptance criteria.
+- Only the approved scope has been implemented.
+- Existing functionality and working code have been preserved.
+- Responsive behaviour has been checked at the relevant supported viewport widths.
+- Accessibility has been checked for the changed elements.
+- Shared components and global styles have been regression-tested when affected.
+- Existing routes, navigation, CTAs, and form behaviour remain intact unless an approved change was required.
+- Available build, lint, and test commands relevant to the change have been run.
+- Any failed checks, untested behaviour, and unresolved issues are clearly reported.
+- The actual implementation and any changed decisions are reflected in the relevant documentation.
+
+Do not require unfinished sections to be implemented merely to verify the current task.
+
+A task may be complete even when the overall phase remains unfinished, provided that the task's acceptance criteria have been satisfied.
+
+After reporting the result, stop and wait for the project owner's approval before starting another task.
 
 ## 16. Decisions that can block specific phases
 
