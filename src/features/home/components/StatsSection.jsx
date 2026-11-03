@@ -1,4 +1,4 @@
-import { User, Globe, Users, Trophy } from 'lucide-react';
+import { Globe, Users, Award, UserRound } from 'lucide-react';
 
 export default function StatsSection() {
     return (
@@ -12,7 +12,7 @@ export default function StatsSection() {
                     {/* 1. Personalised Classes */}
                     <div className="flex items-center justify-center gap-3.5 px-3 py-2 text-left">
                         <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-white/15 text-white shadow-inner backdrop-blur-xs">
-                            <Trophy className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
+                            <UserRound className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
                         </div>
                         <div>
                             <span className="block text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
@@ -42,7 +42,7 @@ export default function StatsSection() {
                     {/* 3. 15+ Years of Experience */}
                     <div className="flex items-center justify-center gap-3.5 px-3 py-2 text-left">
                         <div className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-white/15 text-white shadow-inner backdrop-blur-xs">
-                            <User className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
+                            <Award className="h-5 w-5 sm:h-6 sm:w-6 text-white" aria-hidden="true" />
                         </div>
                         <div>
                             <span className="block text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">

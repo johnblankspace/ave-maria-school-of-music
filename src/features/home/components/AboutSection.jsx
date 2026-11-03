@@ -1,4 +1,4 @@
-import { Award, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import aboutTutorImage from '../../../assets/images/about_tutor_image.webp';
 import Button from "../../../components/common/Button";
 

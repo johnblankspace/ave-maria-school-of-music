@@ -47,7 +47,7 @@ export default function LoginNoticeModal({ isOpen, onClose }) {
           type="button"
           onClick={onClose}
           aria-label="Close dialog"
-          className="absolute top-4 right-4 rounded-lg p-2 text-slate-grey hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
+          className="absolute top-4 right-4 rounded-lg p-2 text-slate-grey hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-11 min-w-11 flex items-center justify-center cursor-pointer"
         >
           <X className="h-5 w-5" aria-hidden="true" />
         </button>

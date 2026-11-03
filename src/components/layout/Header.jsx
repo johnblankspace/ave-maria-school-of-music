@@ -73,7 +73,7 @@ export default function Header({ onOpenLoginModal }) {
           <img
             src={logoBlue}
             alt="Ave Maria School of Music"
-            className="block h-12 w-auto max-w-[180px] shrink-0 object-contain sm:h-14 sm:max-w-[210px] lg:h-16 lg:max-w-[240px]"
+            className="block h-12 w-auto max-w-45 shrink-0 object-contain sm:h-14 sm:max-w-52.5 lg:h-16 lg:max-w-60"
           />
         </a>
 
@@ -186,7 +186,7 @@ export default function Header({ onOpenLoginModal }) {
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-navigation"
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            className="inline-flex items-center justify-center rounded-lg p-2 text-dark-slate hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-[44px] min-w-[44px]"
+            className="inline-flex items-center justify-center rounded-lg p-2 text-dark-slate hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-11 min-w-11"
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6" aria-hidden="true" />
@@ -219,7 +219,7 @@ export default function Header({ onOpenLoginModal }) {
                     }
                   }
                 }}
-                className="block rounded-lg px-3 py-2.5 text-base font-medium text-dark-slate hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-[44px] flex items-center"
+                className="block rounded-lg px-3 py-2.5 text-base font-medium text-dark-slate hover:bg-mist-grey focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-11 items-center"
               >
                 {link.name}
               </a>
@@ -236,7 +236,7 @@ export default function Header({ onOpenLoginModal }) {
                     key={item.name}
                     href={item.href}
                     onClick={closeMenus}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-grey hover:bg-mist-grey hover:text-deep-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-[44px]"
+                    className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-slate-grey hover:bg-mist-grey hover:text-deep-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-steel-blue min-h-11"
                   >
                     <Music className="h-4 w-4 text-steel-blue" aria-hidden="true" />
                     <span>{item.name}</span>
@@ -263,7 +263,7 @@ export default function Header({ onOpenLoginModal }) {
                   closeMenus();
                   onOpenLoginModal();
                 }}
-                className="flex w-full items-center justify-center gap-2 rounded-lg border border-border-grey py-2.5 text-sm font-medium text-royal-navy hover:bg-mist-grey min-h-[44px] cursor-pointer"
+                className="flex w-full items-center justify-center gap-2 rounded-lg border border-border-grey py-2.5 text-sm font-medium text-royal-navy hover:bg-mist-grey min-h-11 cursor-pointer"
               >
                 <LogIn className="h-4 w-4" aria-hidden="true" />
                 <span>Student / Admin Portal Login</span>
