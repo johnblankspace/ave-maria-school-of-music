@@ -7,7 +7,7 @@ export default function HeroSection() {
         <section
             id="hero"
             aria-labelledby="hero-heading"
-            className="scroll-mt-28 lg:scroll-mt-32 relative overflow-hidden bg-gradient-to-b from-sky-50/70 via-cloud-white to-white pt-6 pb-8 sm:pt-8 sm:pb-10 lg:pt-10 lg:pb-12"
+            className="scroll-mt-28 lg:scroll-mt-32 relative overflow-hidden bg-linear-to-b from-sky-50/70 via-cloud-white to-white pt-6 pb-8 sm:pt-8 sm:pb-10 lg:pt-10 lg:pb-12"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-8">
