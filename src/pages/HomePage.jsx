@@ -21,6 +21,7 @@ import {
 import HeroSection from '../features/home/components/HeroSection';
 import StatsSection from '../features/home/components/StatsSection';
 import CourseSection from '../features/home/components/CourseSection';
+import ProcessSection from '../features/home/components/ProcessSection';
 
 import aboutTutorImage from '../assets/images/about_tutor_image.webp';
 import Button from '../components/common/Button';
@@ -111,48 +112,8 @@ export default function HomePage() {
       {/* =========================================================================
           SECTION 6: OUR PROCESS
           ========================================================================= */}
-      <section
-        id="process"
-        aria-labelledby="process-heading"
-        className="bg-white py-16 sm:py-20 lg:py-24 border-t border-border-grey/60"
-      >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <span className="text-xs font-semibold uppercase tracking-wider text-steel-blue">
-              SIMPLE STEPS TO START YOUR MUSIC JOURNEY
-            </span>
-            <h2
-              id="process-heading"
-              className="mt-1 text-3xl font-extrabold tracking-tight text-deep-navy sm:text-4xl"
-            >
-              Our Process
-            </h2>
-          </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step) => {
-              const IconComp = step.icon;
-              return (
-                <div
-                  key={step.num}
-                  className="relative rounded-2xl border border-border-grey/70 bg-cloud-white p-6 shadow-xs flex flex-col justify-between transition-all hover:shadow-md hover:border-steel-blue/40"
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-royal-navy text-sm font-bold text-white shadow-xs">
-                        {step.num}
-                      </span>
-                      <IconComp className="h-5 w-5 text-steel-blue" aria-hidden="true" />
-                    </div>
-                    <h3 className="text-lg font-bold text-deep-navy">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-grey">{step.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <ProcessSection />
 
       {/* =========================================================================
           SECTION 9: FREQUENTLY ASKED QUESTIONS

@@ -7,8 +7,7 @@ export default function AboutSection() {
         <section
             id="about"
             aria-labelledby="about-heading"
-            className="bg-cloud-white py-16 sm:py-20 lg:py-24 border-t border-border-grey/60"
-        >
+            className="bg-cloud-white py-16 sm:py-20 lg:py-24 border-t border-border-grey/60">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
                     {/* Tutor Image Column */}
