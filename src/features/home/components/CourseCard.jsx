@@ -8,7 +8,7 @@ export default function CourseCard({ course }) {
         <div className="flex flex-col justify-between rounded-2xl border border-border-grey/80 bg-cloud-white p-6 sm:p-8 shadow-sm transition-all hover:shadow-md hover:border-steel-blue/40">
             <div>
                 <div
-                    className={`relative mb-6 h-36 w-full overflow-hidden rounded-xl bg-gradient-to-r ${gradient} p-4 flex items-center justify-between text-white shadow-inner`}
+                    className={`relative mb-6 h-36 w-full overflow-hidden rounded-xl bg-linear-to-r ${gradient} p-4 flex items-center justify-between text-white shadow-inner`}
                 >
                     <div>
                         <span className="inline-block rounded-md bg-white/20 px-2.5 py-1 text-xs font-medium tracking-wide backdrop-blur-xs">

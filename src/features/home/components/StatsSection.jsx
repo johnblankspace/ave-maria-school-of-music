@@ -4,7 +4,7 @@ export default function StatsSection() {
     return (
         <section
             aria-label="School Statistics and Key Highlights"
-            className="w-full bg-gradient-to-r from-deep-navy via-[#072B66] to-steel-blue py-6 sm:py-8 text-white shadow-inner"
+            className="w-full bg-linear-to-r from-deep-navy via-[#072B66] to-steel-blue py-6 sm:py-8 text-white shadow-inner"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-white/15">
