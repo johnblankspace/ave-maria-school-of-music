@@ -6,7 +6,7 @@ export default function CtaBanner() {
     return (
         <section aria-labelledby="cta-banner-heading" className="bg-white py-12 sm:py-16 overflow-hidden">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-deep-navy via-royal-navy to-deep-navy px-6 py-12 sm:px-12 sm:py-16 text-center text-white shadow-2xl">
+                <div className="relative overflow-hidden rounded-3xl bg-linear-to-r from-deep-navy via-royal-navy to-deep-navy px-6 py-12 sm:px-12 sm:py-16 text-center text-white shadow-2xl">
                     {/* Background Decorative Rings */}
                     <div
                         className="absolute -top-24 -left-24 h-64 w-64 rounded-full bg-steel-blue/20 blur-2xl"
