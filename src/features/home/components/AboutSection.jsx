@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import aboutTutorImage from '../../../assets/images/about_tutor_image.webp';
-import Button from "../../../components/common/Button";
+import Button from "../../../components/ui/Button";
 
 export default function AboutSection() {
     return (

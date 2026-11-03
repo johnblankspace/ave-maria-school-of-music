@@ -1,5 +1,4 @@
-// src/features/home/components/InquirySection.jsx
-import Button from '../../../components/common/Button';
+import Button from "../../../components/ui/Button";
 
 export default function InquirySection() {
     return (

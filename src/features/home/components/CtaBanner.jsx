@@ -1,6 +1,6 @@
 // src/features/home/components/CtaBanner.jsx
 import { MessageCircle } from 'lucide-react';
-import Button from '../../../components/common/Button';
+import Button from '../../../components/ui/Button';
 
 export default function CtaBanner() {
     return (

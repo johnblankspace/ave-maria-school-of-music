@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ChevronDown, LogIn, Music } from 'lucide-react';
 import logoBlue from '../../assets/logo/logo-blue-cropped.png';
-import Button from '../common/Button';
+import Button from '../ui/Button';
 
 export default function Header({ onOpenLoginModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

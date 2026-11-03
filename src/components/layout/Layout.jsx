@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import WhatsAppButton from '../common/WhatsAppButton';
-import LoginNoticeModal from '../common/LoginNoticeModal';
+import WhatsAppButton from '../ui/WhatsAppButton';
+import LoginNoticeModal from '../ui/LoginNoticeModal';
 
 export default function Layout({ children }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);

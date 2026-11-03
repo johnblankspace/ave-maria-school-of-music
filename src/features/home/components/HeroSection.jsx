@@ -1,6 +1,6 @@
 import { Headphones, ArrowRight, GraduationCap, Laptop, Music, Users, MessageCircle } from 'lucide-react';
 import heroImage from '../../../assets/images/hero_image.jpg'
-import Button from '../../../components/common/Button';
+import Button from '../../../components/ui/Button';
 
 export default function HeroSection() {
     return (

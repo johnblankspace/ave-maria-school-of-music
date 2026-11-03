@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import Button from "../../../components/common/Button";
+import Button from "../../../components/ui/Button";
 import CourseCard from "./CourseCard";
 
 export default function CourseSection() {

@@ -1,6 +1,5 @@
-/**
- * Reusable Button component aligned with docs/design-system.md
- */
+import { twMerge } from "tailwind-merge";
+
 export default function Button({
   children,
   variant = 'primary',
@@ -29,13 +28,21 @@ export default function Button({
     lg: 'text-lg px-6 py-3 min-h-[48px]',
   };
 
-  const combinedStyles = `${baseStyles} ${variantStyles[variant] || variantStyles.primary} ${
-    sizeStyles[size] || sizeStyles.md
-  } ${className}`;
+  const combinedStyles = twMerge(
+    baseStyles,
+    variantStyles[variant] || variantStyles.primary,
+    sizeStyles[size] || sizeStyles.md,
+    className
+  );
 
   if (href) {
     return (
-      <a href={href} className={combinedStyles} {...props}>
+      <a
+        href={href} className={combinedStyles}
+        aria-disabled={disabled || undefined}
+        tabIndex={disabled ? -1 : undefined}
+        onClick={disabled ? (event) => event.preventDefault() : onClick}
+        {...props}>
         {children}
       </a>
     );

@@ -1,7 +1,7 @@
 // src/features/home/components/FaqSection.jsx
 import { useState } from 'react';
 import { Plus, Minus, MessageCircle } from 'lucide-react';
-import Button from '../../../components/common/Button';
+import Button from '../../../components/ui/Button';
 
 export default function FaqSection() {
     const [openFaqIndex, setOpenFaqIndex] = useState(0);
