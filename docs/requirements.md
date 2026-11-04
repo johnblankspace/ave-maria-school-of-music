@@ -2,8 +2,8 @@
 
 **Document:** `docs/requirements.md`  
 **Project:** Ave Maria School of Music  
-**Status:** Working baseline pending final owner approval — audited against the source requirements and latest confirmed decisions  
-**Primary objective:** Launch a public website that attracts prospective students and generates free trial-class enquiries, followed by the phased development of student and administrative functionality.
+**Status:** Updated working baseline pending final owner approval — aligned to the immediate operational MVP and latest confirmed decisions  
+**Primary objective:** Deliver a public music-school website together with an operational MVP for secure lead management, admin-controlled student onboarding, private learning materials, class scheduling, and secure Zoom joining.
 
 ---
 
@@ -40,7 +40,7 @@ The source requirements document defines functional requirements `FR-001` throug
 
 **Important:** this document consolidates requirements by feature area; it does not reproduce every original requirement as a separate numbered row. Keep the original IDs and their meanings when creating implementation tickets or tests. Do not assign an existing ID to a different requirement or silently renumber the baseline. Where this document explicitly resolves a conflict, the project owner's latest decision takes precedence over stale wording in the source document.
 
-The main resolved conflict is `FR-055` versus the older, contradictory wording under `FR-058`: there must be **one shared inquiry/free-trial form**, placed immediately before the footer. Contact navigation and every trial CTA must lead to that same form. `FR-058` is retained as an identifier for the form/submission requirement, but its former implication that a separate second form is needed is superseded.
+The main resolved conflict is `FR-055` versus the older, contradictory wording under `FR-058`: there must be **one shared inquiry/free-trial form**, placed immediately before the footer. Contact navigation and every trial CTA must lead to that same form. `FR-058` is retained as an identifier for the form/submission requirement, but its former implication that a separate second form is needed is superseded. The release-boundary conflict has also been resolved: the immediate MVP includes the operational capabilities listed in Section 4.1; it is not a public-website-only release.
 
 This is a working baseline pending final owner approval, not evidence that any feature has been implemented. Open items are listed in Section 12.
 
@@ -68,8 +68,9 @@ The project must:
 - Attract prospective students, including families living overseas.
 - Make it easy to request a free trial class.
 - Provide a convenient WhatsApp contact option.
-- Support a future transition from manual school administration to a secure student and admin application.
-- Avoid unnecessary complexity in the first release.
+- Provide a secure operational system for managing leads, students, enrolments, learning materials, and scheduled classes.
+- Keep the initial system practical for one teacher managing approximately 50 students, while allowing reasonable future growth.
+- Avoid unnecessary complexity and keep deferred features outside the immediate MVP.
 
 ### 2.2 Target audience
 
@@ -120,8 +121,8 @@ The homepage may use the currently planned trust-statistic claims—15+ years of
 | Prospective student | Understand lessons and request a trial class. | Public website and trial form. |
 | Parent or guardian | Explore lessons for a child and contact the teacher. | Public website and enquiry form; future student information only where appropriately authorised. |
 | Adult student | Explore lessons and request a trial. | Public website; personal student area after enrolment and account setup. |
-| Enrolled student | View class information, attendance, payments, materials, and announcements. | Authenticated student area in a later phase. |
-| Teacher/administrator | Manage enquiries, students, schedules, attendance, payments, materials, and relevant site content. | Protected admin area in a later phase. |
+| Enrolled student | View upcoming classes and assigned learning materials; join authorised classes. | Authenticated student area in the immediate MVP. |
+| Teacher/administrator | Manage enquiries, student records, enrolments, learning materials, and class schedules. | Protected admin area in the immediate MVP. |
 | Future digital-course customer | Access purchased digital courses if this business model is introduced. | Deferred account and course functionality. |
 
 ### 3.1 Student and guardian distinction
@@ -132,7 +133,7 @@ The enquiry workflow must distinguish the student from the person responsible fo
 
 A parent's contact details on a student profile must not automatically grant that parent permission to access the student's account.
 
-A separate parent account or family-account system is not confirmed for the first release.
+A separate parent account or family-account system is deferred and is not required for the immediate MVP.
 
 ### 3.2 Administrative scale
 
@@ -146,83 +147,104 @@ The system should avoid unnecessary complexity while allowing reasonable future 
 
 ## 4. Scope and Release Boundaries
 
-### 4.1 First release: Public website
+### 4.1 Immediate MVP: Public website and operational application
 
 #### Release scope and implementation boundaries
 
-The first release is the public website and its agreed enquiry journey. The requirements in this document describe the complete intended product, not a command to implement every feature in one development task.
+The immediate MVP includes the public website and the essential operational system needed to receive enquiries and manage active students and classes. It is not a public-website-only release.
 
-The first release includes the public-facing website features listed in this section, subject to the confirmed decisions and unresolved items documented in this file.
+The MVP must include:
 
-The following functionality belongs to later phases and must not be implemented as part of the public-website release unless the project owner explicitly approves a scope change:
-
-- Student authentication and the student dashboard.
-- Admin authentication and the admin panel.
-- Student, class, attendance, and payment management.
-- Protected study-material delivery.
-- Certificate management.
-- Paid digital-course purchases and a complete learning management system.
-
-Within the first release, homepage sections must also be implemented incrementally according to `docs/implementation-plan.md`. Inclusion in the approved homepage does not mean every section must be built in a single task.
-
-Before starting a task, identify its release, scope, dependencies, and acceptance criteria. Do not add unrelated sections, pages, integrations, or future-phase functionality without approval.
-
-The first release focuses on the public website and trial-class enquiry journey.
-
-It includes:
-
-- Public homepage and navigation.
-- Keyboard and guitar course information.
-- Tutor/about content.
-- Tutor/About content using the existing approved tutor photograph. The performance video is deferred and is not required for the first release.
-- Information about the teaching process.
-- What We Offer content.
-- Testimonials, subject to verification and publication permission.
-- Specialized-course previews.
-- FAQs.
-- One free trial-class booking form.
+**Public website and lead capture**
+- Existing public website foundation, including the approved homepage content and course information.
+- One shared trial-class/enquiry form, positioned immediately before the footer.
+- Secure lead submission and storage.
+- Validation and clear submission success/failure feedback.
 - WhatsApp contact integration.
-- Footer and relevant social links.
-- Responsive layouts and accessibility.
-- Public-page SEO requirements.
-- Production hosting and deployment, after the hosting and deployment approach is confirmed.
 
-The first release must not depend on the complete student portal or admin panel being available.
+**Admin access and lead management**
+- Secure admin authentication.
+- Protected admin routes and data access.
+- Admin lead list and lead-detail access.
+- Admin ability to manage lead status and relevant lead records according to the approved workflow.
 
-### 4.2 Later phase: School administration
+**Student onboarding and enrolment**
+- Admin-controlled student records and account provisioning.
+- Student authentication and account activation.
+- No public student self-registration.
+- Course and enrolment records required to associate students with their courses and authorize access.
+- Payment is collected manually in advance outside the application; the admin confirms the required advance payment before provisioning a continuing student's account. In-app payment records are deferred.
 
-Planned administrative capabilities include:
+**Learning materials**
+- Admin upload of learning materials.
+- Private storage for non-public materials.
+- Assignment of materials to the appropriate student or enrolment.
+- Authenticated student access to assigned materials only.
 
-- Administrator authentication.
-- Lead management.
-- Student profiles.
-- Course and enrolment management.
-- Class scheduling.
-- Attendance records.
-- Payment records.
-- Learning-material management.
+**Class scheduling and joining**
+- Admin class scheduling and association of sessions with the correct enrolled student.
+- Student dashboard showing the student's upcoming classes.
+- Secure server-side authorization before returning a private Zoom link.
+- The Join Class button becomes available five minutes before the scheduled start.
+- The post-start/post-end access cutoff remains unresolved; do not invent it.
+
+**Quality and release readiness**
+- Functional, authorization, database-policy, and private-storage testing.
+- Responsive and accessibility checks for the public website and application interfaces.
+- Production configuration, deployment, and smoke testing after the hosting approach is approved.
+
+The existing public website is the starting foundation. Additional marketing-page expansion, visual beautification, or optional content must not delay the operational MVP. Essential public form, responsive, accessibility, SEO, and production checks remain in scope.
+
+#### MVP implementation boundaries
+
+The immediate MVP does not automatically include every feature described elsewhere in this document. Implement according to `docs/implementation-plan.md`, one approved task at a time.
+
+Do not include the following deferred capabilities in the MVP unless the project owner approves a scope change:
+- Attendance recording and attendance history.
+- In-app payment records and payment-history screens.
 - Announcements.
-- Certificate management.
-- Selected website content and settings management.
+- Digital certificate generation and issuance.
+- Exam-result management.
+- Guardian/family accounts and guardian-to-student account access.
+- Advanced analytics and reporting.
+- Paid digital-course purchases or a complete learning management system.
+- Tutor performance video on the public website.
 
-The exact release boundary between the admin panel and student dashboard will be defined in `docs/implementation-plan.md`.
+The MVP may retain manual business processes outside the application where explicitly stated, such as bank-transfer collection and direct tutor/parent coordination of makeup lessons.
 
-### 4.3 Later phase: Student area
+Before starting a task, identify its release, scope, dependencies, and acceptance criteria. Do not add unrelated pages, integrations, or future-phase functionality without approval.
 
-Planned student functionality includes:
+### 4.2 Deferred phase: Additional school administration
 
+The following administrative capabilities are deferred beyond the immediate MVP:
+- Attendance records and attendance corrections.
+- In-app payment records and payment-history management.
+- Announcements.
+- Certificate management and issuance.
+- Exam-result records.
+- Advanced analytics and reports.
+- Selected website content/settings management beyond what is essential to operate the MVP.
+
+Do not implement these as MVP requirements merely because they are described in this specification.
+
+### 4.3 Deferred student functionality
+
+The immediate MVP student area includes:
 - Secure login and password recovery.
 - Student dashboard.
 - Upcoming class information.
 - Authorised class joining.
+- Assigned learning materials and permitted downloads.
+
+The following student-facing capabilities are deferred:
 - Attendance history.
 - Payment history.
-- Study materials.
 - Certificates.
 - Announcements.
-- Student profile management.
+- Guardian/family account features.
+- Advanced progress reporting.
 
-These features are planned, not implemented.
+These features are planned, not implemented, and must not be treated as MVP acceptance requirements.
 
 ### 4.4 Future enhancements
 
@@ -280,7 +302,7 @@ The agreed homepage sequence is:
 3. Trust statistics.
 4. Courses.
 5. Specialized-course previews.
-6. Tutor/About section, including the performance video.
+6. Tutor/About section using the approved tutor photograph; the performance video is deferred.
 7. Our Process.
 8. Testimonials.
 9.  FAQs
@@ -591,7 +613,7 @@ Confirm final labels and which fields are required before implementation. Do not
 ### 6.3 Confirmed enquiry-to-enrollment workflow
 
 1. **Student/parent submits the form.** They provide the student details, contact information, and the email address intended for the student account.
-2. **Admin receives the lead.** The submission appears in the admin dashboard when that feature is implemented, and the admin receives a WhatsApp notification. The exact notification mechanism remains to be selected.
+2. **Admin receives the lead.** The submission is securely stored and appears in the protected admin lead-management interface in the immediate MVP. An automated WhatsApp notification is not confirmed; the exact notification mechanism remains to be selected.
 3. **Admin contacts the student/parent.** The admin uses WhatsApp to discuss the enquiry and arrange the free trial class.
 4. **Student decides whether to continue.** If they choose to enroll, the admin collects advance payment equal to one month's tuition.
 5. **Admin creates the student account.** The account uses the email address provided in the inquiry.
@@ -602,7 +624,7 @@ If the activation link expires, the student/parent must contact the admin to req
 
 ### 6.4 Lead management
 
-Lead storage and dashboard management are planned for a later application phase. Leads must be available only to authorized administrators. The proposed statuses are:
+Lead storage and protected admin dashboard management are part of the immediate MVP. Leads must be available only to authorized administrators. The proposed statuses are:
 
 1. New Lead
 2. Contacted
@@ -622,7 +644,7 @@ These labels are proposed and must be confirmed before implementation. Do not as
 
 ## 7. Student and Admin Application Requirements
 
-These requirements describe planned later functionality. They do not imply that the functionality belongs in the first public-website release.
+This section defines the operational application requirements. Features explicitly marked MVP are required for the immediate MVP; features marked deferred are reserved for a later approved phase.
 
 ### 7.1 Authentication and account setup
 
@@ -653,18 +675,22 @@ The confirmed onboarding and account-provisioning flow is admin-managed:
 
 ### 7.2 Student dashboard
 
-The planned student dashboard includes:
+**Immediate MVP dashboard features:**
 
-- Overview of upcoming classes.
+- Student profile information needed to identify the account and enrolled course.
+- Overview of the student's upcoming classes.
 - Authorised class-joining functionality.
+- Assigned learning materials and permitted downloads.
+
+**Deferred dashboard features:**
+
 - Attendance history.
 - Payment history.
-- Study materials.
 - Certificates.
 - Announcements.
-- Student profile information.
+- Advanced progress reporting.
 
-The exact dashboard layout and feature release order will be established in the implementation plan.
+The implementation plan defines the task order. Do not implement deferred dashboard features as part of the MVP.
 
 **Acceptance criteria**
 
@@ -685,7 +711,7 @@ The exact dashboard layout and feature release order will be established in the 
 
 **Teacher scheduling capabilities:**
 
-- The teacher must be able to maintain class schedules, view sessions, and associate classes with the appropriate enrolled student.
+- The teacher/admin must be able to create and maintain class schedules, view sessions, and associate each session with the appropriate enrolled student. This scheduling capability is part of the immediate MVP.
 - Conflicting class bookings must be prevented once the scheduling system is implemented.
 - Scheduling rules must not contradict the teacher's confirmed availability.
 
@@ -720,39 +746,37 @@ The exact dashboard layout and feature release order will be established in the 
 - Class-link access follows an approved time window and server-side authorisation policy.
 - Failure to authorise a request fails closed and does not reveal private class information.
 
-### 7.5 Attendance
+### 7.5 Attendance — deferred
 
-The student area is intended to display attendance history.
+Attendance management is deferred beyond the immediate MVP.
 
-The teacher must be able to record attendance against the relevant class and student.
+When approved for a later phase:
+- The teacher must be able to record attendance against the relevant class and student.
+- Students may be able to view their own attendance history.
+- Attendance records must be associated with the correct student and class.
+- Administrative changes must be restricted to authorised users.
+- Attendance information must be displayed accurately.
 
-**Acceptance criteria**
+Do not create attendance workflows or require attendance tables for the immediate MVP unless a documented dependency is identified and approved. Attendance is not required merely to schedule a class or authorize Zoom joining.
 
-- Attendance records are associated with the correct student and class.
-- Students can access only their own permitted attendance information.
-- Administrative changes are restricted to authorised users.
-- Attendance information is displayed accurately.
+### 7.6 Payments — manual collection in MVP; in-app records deferred
 
-### 7.6 Payments
+The confirmed initial payment model uses manual bank transfers, with one month's tuition collected in advance when a student decides to continue after the trial.
 
-The initial payment model uses manual bank transfers, with fees collected in advance.
+For the immediate MVP:
+- Payment collection and confirmation may remain outside the application.
+- The admin must confirm the required advance payment before provisioning a continuing student's account.
+- Do not build an in-app payment ledger, payment-history screen, payment gateway, reconciliation workflow, or automated payment processing as an MVP requirement.
 
-The planned system should allow appropriate payment records to be maintained and displayed to authorised users.
+For a later approved phase, the system may maintain appropriate payment records and display them to authorised users. Such records must be associated with the correct student, distinguish confirmed payments from unconfirmed payments, and remain private.
 
-**Acceptance criteria**
-
-- Payment records are associated with the correct student.
-- Students can access only their own permitted payment history.
-- Payment information is not exposed publicly.
-- Records distinguish recorded payments from payments that have not been confirmed.
-
-Payment-gateway integration is not confirmed for the initial release.
+Payment-gateway integration is not confirmed.
 
 ### 7.7 Study materials
 
-The planned student area must provide access to appropriate study materials.
+The immediate MVP student area must provide access to learning materials assigned by the admin.
 
-Materials may include audio files and other educational resources.
+Materials may include audio files and other educational resources. The admin must be able to upload materials and assign them to the appropriate student or enrolment. The final assignment relationship remains unresolved (see OQ-18).
 
 Private student materials must not be publicly accessible unless a particular resource is explicitly approved for public access.
 
@@ -767,17 +791,17 @@ File-size limits, allowed formats, retention rules, and the final storage config
 
 ### 7.8 Student levels, examinations, and certificates
 
-**Student levels:**
+**Student levels — immediate MVP:**
 
 - **Default starting level:** An enrolled student starts at the **Beginner** level unless the administrator explicitly assigns a different starting level.
 - **Admin level management:** The administrator controls the available stage and level definitions and updates a student's level (for example, advancing a student from Beginner to Intermediate) based on instructional progress.
 
-**Practical examinations:**
+**Practical examinations — deferred:**
 
 - The tutor/administrator may conduct practical examinations when pedagogically appropriate.
-- When the examination feature is implemented, examination results may be recorded within the student's private record.
+- Examination-result recording is deferred beyond the immediate MVP.
 
-**Digital certificate issuance:**
+**Digital certificate issuance — deferred:**
 
 - **Administrative control:** Certificate issuance is strictly controlled by the administrator. A certificate may be issued following stage completion, completion of an approved book or learning milestone, practical examination results, or an explicit administrative decision.
 - **Access restriction:** Students can view and download only digital certificates that have been officially issued to their own account.
@@ -792,9 +816,9 @@ File-size limits, allowed formats, retention rules, and the final storage config
 - Certificates do not imply official recognition or accreditation that has not been confirmed.
 - Certificate access and downloads are restricted to authorised students.
 
-### 7.9 Announcements
+### 7.9 Announcements — deferred
 
-The planned application includes announcements for students.
+Announcements are not part of the immediate MVP. In a later approved phase, the application may include announcements for students.
 
 The administrator should be able to publish approved announcements, and students should be able to access announcements intended for them.
 
@@ -806,22 +830,27 @@ The administrator should be able to publish approved announcements, and students
 
 ### 7.10 Admin panel
 
-The planned admin area includes:
+**Immediate MVP admin capabilities:**
 
 - Lead management.
-- Student management.
-- Course and enrolment management.
-- Class scheduling.
+- Student records and account provisioning.
+- Course and enrolment management required for access control.
+- Learning-material upload and assignment.
+- Class scheduling and session management.
+
+**Deferred admin capabilities:**
+
 - Attendance management.
-- Payment records.
-- Study-material management.
+- In-app payment records.
 - Certificate management.
+- Exam-result management.
 - Announcements.
-- Selected website content and settings.
+- Advanced analytics and reports.
+- Broader website content/settings management.
 
 The initial admin model is one teacher/administrator.
 
-The precise admin navigation, permissions, and content-editing boundaries remain to be defined in the architecture and implementation plan.
+The precise admin navigation, permissions, and content-editing boundaries remain to be defined in the architecture and implementation plan. All MVP admin actions must be enforced by backend authorization and must not rely only on hidden interface controls.
 
 **Acceptance criteria**
 
@@ -871,7 +900,7 @@ The application must consider:
 - Appropriate alternative text.
 - Accessible interactive controls.
 - Reduced-motion preferences.
-- Accessible video sound controls and failure recovery.
+- Accessible media controls and failure recovery when media features are approved for implementation.
 
 **Acceptance criteria**
 
@@ -889,7 +918,7 @@ A specific formal conformance level has not been confirmed.
 
 The website should avoid unnecessary loading, excessive JavaScript, unoptimised media, and layout instability.
 
-The tutor performance video is a known asset that requires optimisation and an appropriate production delivery strategy.
+The tutor performance video is deferred from the immediate MVP. If it is approved for a future release, its optimisation and production delivery strategy must be reviewed before implementation.
 
 **Acceptance criteria**
 
@@ -967,7 +996,7 @@ The website must work in current, commonly used desktop and mobile browsers.
 **Acceptance criteria**
 
 - Navigation, forms, and essential interactions work in the browsers selected for release testing.
-- Video playback degrades gracefully when autoplay or other browser capabilities are unavailable.
+- Browser-dependent features used by the implemented public website degrade gracefully.
 - Unsupported browser features do not prevent visitors from accessing essential content.
 
 The exact browser support matrix remains to be confirmed.
@@ -999,6 +1028,7 @@ Private student and admin areas must not be exposed through public search indexi
 - Public pages have appropriate titles and descriptions.
 - Intended public pages can be indexed.
 - Private application routes are excluded from public indexing as appropriate.
+- `noindex` and robots directives are not security controls; authentication, backend authorization, and database/storage policies must protect private routes and data.
 - Canonical URLs are consistent with the approved production domain.
 - Structured data is accurate and supported by visible page content.
 
@@ -1049,28 +1079,27 @@ The domain has been purchased through Hostinger, but the final hosting, DNS, and
 
 ---
 
-## 9. Exclusions
+## 9. Deferred Features and Exclusions
 
-Unless explicitly approved later, the following are excluded from the first public-website release:
+The following are excluded from the immediate MVP unless explicitly approved through change control:
 
-- A complete student dashboard.
-- A complete admin management panel.
-- Automated class scheduling and conflict management.
-- Attendance-management workflows.
-- Payment reconciliation and payment-gateway integration.
-- Protected study-material delivery.
-- Digital certificate generation and issuance.
-- Student announcements within an authenticated portal.
-- Parent accounts or family-account management.
+- Attendance-management workflows and attendance history.
+- In-app payment records, payment-history screens, payment reconciliation, and payment-gateway integration.
+- Announcements within the authenticated portal.
+- Digital certificate generation, issuance, and student certificate downloads.
+- Exam-result recording.
+- Parent/guardian accounts and family-account management.
+- Advanced analytics and reports.
 - Paid digital-course purchases.
 - A full learning management system.
 - Multi-teacher scheduling and complex organisational roles.
+- Tutor performance video on the public website.
 - Unapproved integrations or third-party services.
 - Unverified marketing claims, testimonials, qualifications, or certificate-recognition claims.
 
-These exclusions do not necessarily remove the features from the overall project. They define what must not be assumed to belong to the first release.
+These exclusions do not necessarily remove the features from the overall product roadmap. They define what must not be treated as an immediate MVP requirement.
 
----
+The following are **not excluded** from the immediate MVP: secure lead submission and admin lead management, admin-controlled student provisioning, student authentication, course/enrolment records, private learning-material delivery, admin class scheduling, student upcoming-class visibility, and secure server-side Zoom joining.
 
 ## 10. Proposed Technical Decisions
 
@@ -1105,29 +1134,29 @@ Do not replace the existing stack or introduce additional libraries without a sp
 - Overseas students need flexible scheduling.
 - Students must have their own musical instrument.
 - The teacher can provide instrument-buying information directly when requested.
-- The public website is the first implementation priority.
+- The immediate MVP includes the public website and essential operational admin/student functionality.
 - The Contact navigation item and trial-booking CTAs must lead to the single homepage trial form.
 - The application uses the existing JavaScript/React/Vite/Tailwind stack.
 - The About section uses the existing approved tutor photograph in the first release; the tutor performance video is deferred.
-- The student and admin functionality is planned for later development.
+- The admin and student functionality required by Section 4.1 is part of the immediate MVP; attendance, in-app payment records, announcements, certificates, exam results, guardian accounts, and advanced reports are deferred.
 
 ### 11.2 Assumptions requiring confirmation
 
 The following details must not be treated as established facts until confirmed:
 
-- Minimum student age.
+- Whether the school has any minimum student age beyond serving children and adults; do not impose an 18+ rule.
 - Guardian requirements and consent wording.
 - Required versus optional enquiry fields.
 - Trial-class duration and scheduling process.
 - Fee amounts and published pricing.
 - Exact meaning of a class section.
 - Any formal cancellation or notice rules beyond direct tutor-parent arrangement.
-- Lead-notification and follow-up workflow.
-- Student account invitation and recovery details.
+- Lead-notification and follow-up workflow; lead storage and admin viewing are MVP requirements, but automated WhatsApp notification is unresolved.
+- Exact student account invitation expiry duration and detailed recovery behaviour; admin-controlled provisioning and secure activation are required.
 - Google login for the student portal.
-- Class-link access window.
+- Class-link access cutoff after the confirmed five-minute-before-start activation; do not invent a post-start or post-end cutoff.
 - Payment-recording and reconciliation procedures.
-- Study-material limits and retention rules.
+- Study-material file limits, formats, retention rules, and whether assignment is directly to a student or through an enrolment.
 - Certificate issuance and completion criteria.
 - Final specialised-course and free-course catalogues.
 - Production hosting and video delivery.
@@ -1142,14 +1171,14 @@ The following questions should be resolved when they become relevant to implemen
 
 | ID | Question | Why it matters | Needed before |
 |---|---|---|---|
-| OQ-01 | What is the minimum permitted student age, if any? | Determines guardian-related validation and consent rules. | Finalising trial form rules. |
+| OQ-01 | Does the school have any minimum student age beyond serving children and adults? | Determines any additional guardian-related validation and consent rules; do not impose a blanket 18+ rule. | Finalising trial form rules. |
 | OQ-02 | Which fields are required, and what exact consent wording must be shown? | Determines validation and data collection. | Implementing the final trial form. |
 | OQ-03 | How should the teacher be notified of a new enquiry? | Determines the lead-notification workflow. | Implementing backend submission and notifications. |
 | OQ-04 | What are the exact lead statuses and permitted transitions? | Determines lead-management behaviour. | Implementing the admin lead workflow. |
 | OQ-05 | What is the exact trial-class booking and confirmation process? | Determines whether the form records a request or confirms an appointment. | Implementing the enquiry workflow. |
 | OQ-06 | What does one class section mean operationally? | Affects class and payment records. | Designing class and payment data. |
 | OQ-07 | Are there any formal cancellation or notice rules beyond direct tutor-parent arrangement? | Affects scheduling and attendance workflows. | Implementing class management. |
-| OQ-08 | What time window permits a student to join a Zoom class? | Determines class-link authorisation. | Implementing secure class joining. |
+| OQ-08 | What is the permitted Zoom-link access cutoff after the confirmed five-minute-before-start activation? | Determines when the server must stop releasing the class link; no after-start or after-end cutoff is approved yet. | Finalising secure class joining. |
 | OQ-09 | Will Google login be included in the first authenticated release? | Affects authentication scope. | Finalising authentication. |
 | OQ-10 | What are the study-material file limits, formats, and retention rules? | Affects storage and access policies. | Implementing material management. |
 | OQ-11 | What qualifies a student to receive a certificate? | Prevents incorrect or misleading certificates. | Implementing certificate issuance. |
@@ -1159,76 +1188,120 @@ The following questions should be resolved when they become relevant to implemen
 | OQ-15 | What are the approved performance, browser-support, and accessibility targets? | Defines measurable release expectations. | Finalising quality criteria. |
 | OQ-16 | Which privacy policy and other legal pages are required, and who approves their content? | Affects public launch readiness. | Production release. |
 | OQ-17 | What is the approved production domain and canonical URL configuration? | Determines metadata and canonical URLs. | SEO configuration and deployment. |
+| OQ-18 | Should learning materials be assigned directly to a student or to an enrolment? | Determines the material-assignment relationship and access checks. | Finalising material assignment and database implementation. |
 
 Do not block unrelated work while an open question remains unresolved. Resolve each question before implementing the functionality that depends on it.
 
 ---
 
-## 13. Release Acceptance Criteria
-
-The first public release is acceptable when the following criteria are satisfied.
+## 13. Immediate MVP Release Acceptance Criteria
 
 ### Task-level acceptance versus release-level acceptance
 
-The acceptance criteria in this section determine whether the complete first public-website release is ready for release. They are not requirements that every individual development task must satisfy independently.
+The criteria in this section determine whether the immediate MVP is ready for release. They are not requirements that every individual development task must satisfy independently.
 
-Each implementation task must define its own acceptance criteria based on the relevant requirements in this document.
+Each implementation task must define its own acceptance criteria based on the relevant requirements in this document and the current phase in `docs/implementation-plan.md`.
 
-For an individual section task:
-
-- Verify the required content and behaviour of the assigned section.
+For an individual task:
+- Verify the required content and behaviour of the assigned feature.
 - Check responsive behaviour and accessibility where relevant.
 - Run the available project checks appropriate to the changes made.
-- Verify that the task has not introduced unintended changes to unrelated sections or shared functionality.
-- Report completed work, files changed, checks performed, and any unresolved issues.
-- Do not claim that the entire website or release is complete when only one section has been implemented.
+- Verify that the task has not introduced unintended changes to unrelated functionality.
+- Report completed work, files changed, checks performed, and unresolved issues.
+- Do not claim that the entire MVP is complete when only one feature has been implemented.
 
-A section task may be considered complete when its own acceptance criteria are satisfied, even though other homepage sections remain unfinished.
-
-The complete public-website release must not be declared ready until all applicable release-level acceptance criteria have been satisfied.
+A task may be considered complete when its own acceptance criteria are satisfied, even though other MVP tasks remain unfinished.
 
 After completing a task, wait for the project owner's review and approval before starting the next task. Do not automatically proceed through the remaining implementation plan.
 
-### Public website
+### Public website and enquiry
 
-- The homepage contains the agreed sections in the correct order.
+- The public website contains the approved essential content and navigation.
 - Keyboard and guitar course information is available.
-- Tutor information uses verified content.
-- The performance video has the agreed playback behaviour and accessible fallback.
+- Tutor information uses verified content and the approved tutor photograph.
+- The deferred tutor performance video is not required for the MVP.
 - Testimonials are published only after verification and permission.
 - Specialized-course previews and availability messages follow the approved behaviour.
 - Navigation and footer links work.
 - Responsive layouts are usable at the agreed viewport widths.
-
-### Trial-class enquiry
-
-- There is one trial-class booking form on the homepage immediately before the footer.
+- There is one shared trial-class/enquiry form on the homepage immediately before the footer.
 - The Contact navigation item and every trial-booking CTA lead to that same form.
 - No separate general contact form exists.
 - Validation works for the approved fields and rules.
-- Future dates of birth are rejected.
+- Future dates of birth are rejected; no blanket over-18 rule is applied.
 - Guardian-related behaviour follows the approved policy.
 - Submission success and failure are communicated accurately.
-- The actual lead-storage and notification behaviour matches the approved implementation.
+- The form securely stores a lead record.
 
-### Quality and security
+### Admin authentication and lead management
 
-- Relevant lint and production-build checks pass.
-- Essential interactions are tested in a browser.
-- Keyboard navigation and visible focus are checked.
-- Responsive behaviour is verified.
-- No known secrets are exposed in client-side code.
-- Public content does not expose private student information.
-- SEO metadata and indexability follow `docs/seo.md`.
-- Production configuration and deployment are verified before the site is declared live.
+- Admin authentication is implemented and protected.
+- Unauthenticated users cannot access admin routes or admin data.
+- The admin can securely view submitted leads.
+- The admin can manage lead information/status according to the approved lead workflow.
+- Public users cannot list, read, update, or delete lead records.
+- Automated WhatsApp notifications are not assumed unless separately approved and configured.
 
-The student dashboard and admin panel are not acceptance prerequisites for the first public-website release unless the approved release scope changes.
+### Student records, accounts, courses, and enrolments
 
----
+- Only an authorised admin can provision student accounts.
+- Public student self-registration is not available.
+- Students can activate accounts through the approved secure email flow and create their own password.
+- The exact invitation expiry duration is not assumed.
+- Student authentication and role-based authorization are enforced beyond frontend route visibility.
+- Student records support children and adults without equating the student to an adult account holder.
+- Course and enrolment records correctly associate students with permitted access.
+- The admin confirms one month's advance tuition before provisioning a continuing student's account; payment collection may remain outside the application.
+- Students can access only their own permitted account information.
+
+### Learning materials
+
+- Admins can upload approved learning materials to private storage.
+- Materials can be assigned to the intended student or enrolment using the approved data model.
+- Students can access only materials assigned to them.
+- Unauthorised users cannot retrieve private files.
+- Missing or unavailable files produce useful feedback.
+- File limits, formats, and retention rules follow the decisions made before the relevant implementation.
+
+### Class scheduling and Zoom joining
+
+- Admins can create and manage class sessions for the correct enrolled students.
+- Class records store appropriate start/end timestamps and support the school's time-zone requirements.
+- Students can view their own upcoming classes.
+- The Join Class action becomes available five minutes before the scheduled start.
+- The server independently verifies identity, student-to-session assignment, and the approved access window before returning a private Zoom link.
+- A student cannot retrieve another student's Zoom link.
+- The after-start/after-end cutoff remains unresolved until the project owner approves it; the system must not invent a cutoff.
+- Zoom meeting details and secrets are not exposed in public frontend code or unrestricted database responses.
+
+### Quality, security, and deployment
+
+- Relevant lint and production-build checks pass, or failures are explicitly reported.
+- Essential public and authenticated workflows are tested in a browser.
+- Role permissions and database Row Level Security are tested, including negative tests.
+- Private Storage access is tested.
+- Secure Zoom-link authorization is tested, including unauthorized and out-of-window requests once the access window is approved.
+- Keyboard navigation, visible focus, and responsive behaviour are checked.
+- No known secrets are exposed in client-side code or committed to the repository.
+- Public content does not expose private student or lead information.
+- SEO metadata and public/private indexing behaviour follow `docs/seo.md`.
+- Production configuration and deployment are verified after the hosting approach is approved.
+- Production smoke tests cover the public enquiry flow and the authenticated MVP workflows.
+
+### Explicitly not required for MVP acceptance
+
+The following are deferred and must not block MVP release:
+- Attendance records and attendance history.
+- In-app payment records and payment-history screens.
+- Announcements.
+- Certificates and exam-result management.
+- Guardian/family accounts.
+- Advanced analytics and reports.
+- Paid digital-course purchases or a full LMS.
 
 ## 14. Requirements audit and traceability notes
 
-This revision was checked against the source document containing `FR-001`–`FR-109` and `NFR-001`–`NFR-031`, plus the project owner's later clarifications. The requirements remain grouped by feature area for readability; keep the source IDs when implementing and testing the corresponding items.
+This revision was checked against the source document containing `FR-001`–`FR-109` and `NFR-001`–`NFR-031`, the latest project-owner decisions, and the immediate MVP direction. The requirements remain grouped by feature area for readability; keep the source IDs when implementing and testing the corresponding items.
 
 ### Functional requirement coverage index
 
@@ -1245,10 +1318,10 @@ This revision was checked against the source document containing `FR-001`–`FR-
 | `FR-052` | FAQ |
 | `FR-053`–`FR-058` | One shared homepage inquiry/free-trial form, form placement, Contact navigation, WhatsApp button/number; stale separate-form wording under `FR-058` is superseded |
 | `FR-059`–`FR-065` | Student/guardian details, DOB and age calculation, contact details, form validation; no blanket over-18 rule for students |
-| `FR-066`–`FR-067` | Lead storage and status management (planned; final labels/transitions need confirmation) |
-| `FR-068`–`FR-074` | Authentication, recovery, optional Google login, role separation, admin invitation, no permanent password sharing, future family-account compatibility |
-| `FR-075`–`FR-081` | Student dashboard, upcoming classes, protected class joining, attendance, payments, study materials, certificates |
-| `FR-082`–`FR-109` | Remaining administrative/dashboard capabilities in the source baseline, including student/class administration, attendance/payment/material/announcement/certificate management and related application functions. Use the original source requirement wording when assigning implementation tickets; do not infer an unlisted feature from this summary. |
+| `FR-066`–`FR-067` | Secure lead storage and admin lead/status management in the immediate MVP (final labels/transitions need confirmation) |
+| `FR-068`–`FR-074` | Admin authentication, invite-only student account provisioning, student login/recovery, role separation, optional unconfirmed Google login, no permanent password sharing, future family-account compatibility |
+| `FR-075`–`FR-081` | Student dashboard, upcoming classes, protected class joining, and assigned learning materials are immediate MVP; attendance, in-app payments, and certificates are deferred |
+| `FR-082`–`FR-109` | Includes student/course/enrolment administration, class scheduling, learning-material management, and other admin/dashboard capabilities. Class scheduling and materials are immediate MVP; attendance, payment records, announcements, certificates, exam results, and advanced reports are deferred. Use the original source requirement wording when assigning implementation tickets; do not infer an unlisted feature from this summary. |
 
 ### Non-functional requirement coverage index
 
@@ -1265,7 +1338,7 @@ The source contains `NFR-001`–`NFR-031`. Their coverage is consolidated under 
 | Enrollment | Admin follows up on WhatsApp; if student chooses to continue, one month's tuition is collected in advance before account setup. |
 | Account activation | Admin creates/invites the account; activation link is emailed; if expired, student/parent contacts admin for a new link. Expiry duration remains open. |
 | Level and certificate | Beginner is the starting level; admin controls levels and certificate issuance. Level, enrollment status, exam results, and certificate status are distinct. |
-| Class joining | Join button activates five minutes before scheduled start; backend authorization is mandatory. The cutoff after start is unresolved. |
+| Class joining | Join button activates five minutes before scheduled start; backend authorization is mandatory. The post-start/post-end cutoff is unresolved. |
 | Tutor qualifications | Describe syllabus alignment accurately; do not claim official Trinity certification/accreditation without verification. |
 | Hosting | Hostinger is the domain registrar/account provider; frontend hosting and DNS/deployment choices remain undecided. |
 
@@ -1290,6 +1363,25 @@ For FR-055, the confirmed rule remains: **one homepage Free Trial Class Booking 
 
 This document captures the available confirmed project decisions and identifies unresolved details without treating them as approved requirements.
 
-Before this draft becomes the final requirements baseline, reconcile its content against the original numbered functional and non-functional requirements lists. Preserve the established IDs and meanings, including FR-055, and update any related acceptance criteria that conflict with the single-form requirement.
+The original functional and non-functional requirement IDs have been retained in the traceability index. Before this draft becomes the final requirements baseline, the project owner should complete a final review of the original row-by-row requirement wording and approve the remaining open decisions. Do not silently renumber or repurpose existing IDs.
 
-**Document status:** Working baseline pending final owner approval; not yet confirmed as the final approved requirements baseline.
+**Document status:** Updated working baseline pending final owner approval; not yet confirmed as the final approved requirements baseline.
+
+---
+
+## 17. Revision Notes — Immediate MVP Alignment
+
+This revision changes the release strategy from a public-website-only first release followed by later admin/student functionality to an immediate operational MVP.
+
+Main changes:
+1. Section 4.1 now defines the immediate MVP as the public website plus lead management, admin authentication, admin-controlled student provisioning, student authentication, course/enrolment records, private learning materials, class scheduling, and secure Zoom joining.
+2. Sections 4.2 and 4.3 now identify attendance, in-app payment records, announcements, certificates, exam results, guardian accounts, and advanced reports as deferred.
+3. Section 6 now treats secure lead storage and protected admin lead management as immediate MVP functionality.
+4. Section 7 now distinguishes MVP functionality from deferred student/admin capabilities.
+5. Section 8 removes first-release video requirements because the tutor performance video is deferred.
+6. Section 9 and Section 13 now describe deferred features as non-blocking for MVP acceptance and add operational workflow acceptance criteria.
+7. Section 11 updates the confirmed implementation direction from public website first to public website plus essential operational functionality.
+8. Section 12 adds the unresolved material-assignment relationship and clarifies the unresolved Zoom access cutoff.
+9. The one shared enquiry/free-trial form, advance payment before continuing-student account provisioning, admin-only account provisioning, child/adult student support, and five-minute-before-start Zoom activation remain unchanged.
+
+This revision does not claim that any feature has been implemented. It defines the approved target scope for subsequent development.

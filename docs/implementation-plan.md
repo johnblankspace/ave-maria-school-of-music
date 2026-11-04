@@ -1,330 +1,545 @@
-# Implementation Plan — Ave Maria School of Music
+# Implementation Plan --- Ave Maria School of Music
 
-**Document:** `docs/implementation-plan.md`  
-**Status:** Proposed phased plan; adjust only after reviewing the current repository and confirming dependencies.
+**Document:** `docs/implementation-plan.md`\
+**Status:** Proposed delivery plan; confirm the current repository state
+and dependencies before each task.
 
 ## 1. Goal
 
-Build and verify the project in small stages, beginning with the public website and its single inquiry/free-trial form. Add lead management, authentication, admin tools, and the student portal only after the earlier phases are reviewed.
+Deliver the Ave Maria School of Music public website and essential
+operational system as one secure, usable MVP. Build in small, testable
+increments, following the dependency order below. The public website
+already exists as a starting foundation; further marketing-page
+beautification must not block the operational workflows.
 
-A feature being listed in this plan does not mean it is implemented.
+The immediate MVP must support:
 
-### Task execution and approval boundaries
+-   Public trial/enquiry submission and secure lead storage.
+-   Admin authentication and protected lead management.
+-   Admin-controlled student records and account provisioning.
+-   Student authentication without public self-registration.
+-   Course and enrolment records required for access control.
+-   Private learning-material upload, assignment, and student access.
+-   Admin class scheduling and student-specific upcoming-class views.
+-   Secure, server-authorized Zoom joining.
+-   Security, functional, responsive, accessibility, and deployment
+    verification.
 
-This plan defines the implementation sequence for the complete project. It does not authorise the implementation of every task in a phase at once.
+This plan does not claim any feature is already implemented. Inspect the
+repository and verify actual status before assigning a task.
 
-Work on only one explicitly defined implementation task at a time. Each task must identify its scope, relevant requirements, dependencies, acceptance criteria, and exclusions.
+## 2. Authoritative documents and technology constraints
 
-After completing a task:
+Read these documents before relevant work:
 
-1. Verify the implemented changes against that task's acceptance criteria.
-2. Run the relevant available project checks.
-3. Report the files changed, checks performed, results, and unresolved issues.
-4. Stop and wait for the project owner's review and approval.
+-   `docs/requirements.md` --- approved business behaviour,
+    requirements, acceptance criteria, and unresolved decisions.
+-   `docs/database-schema.md` --- tables, relationships, constraints,
+    and implementation priority.
+-   `docs/security.md` --- authentication, authorization, RLS, Storage,
+    trusted operations, and security tests.
+-   `docs/architecture.md` --- system boundaries and technical
+    organisation.
+-   `docs/design-system.md` --- brand, tokens, responsive behaviour, and
+    component guidance.
+-   `docs/seo.md` --- public-page SEO.
+-   `AGENTS.md` --- AI-agent workflow and project constraints.
+-   `README.md` --- setup and project commands.
 
-Do not automatically proceed to the next task or implement additional sections, features, or phases without approval.
+Intended stack:
 
-A phase may contain multiple tasks and can remain incomplete while individual tasks are reviewed and approved.
+-   React + JavaScript/JSX
+-   Vite
+-   Tailwind CSS v4
+-   React Router DOM
+-   React Hook Form
+-   Zod
+-   Supabase (Auth, PostgreSQL, Storage, and trusted server-side
+    functions)
+-   Lucide React
+-   Zoom for online lessons
+-   WhatsApp as the contact channel
 
-## 2. Technology constraints
+Do not introduce TypeScript, Firebase, Next.js, a payment gateway,
+another styling system, or a new infrastructure provider without
+explicit approval. Inspect `package.json` and existing configuration
+rather than assuming dependencies or scripts exist.
 
-Use the existing JavaScript/JSX, React, Vite, Tailwind CSS v4, React Router DOM, React Hook Form, Zod, Supabase client, and Lucide React stack. Do not introduce TypeScript, switch frameworks, or replace the styling/backend approach without an approved decision. Inspect the repository and `package.json` before assuming a dependency or script is available.
+## 3. Execution rules
 
-## 3. Working rules
+1.  Work on one task at a time.
+2.  Before editing, inspect relevant files and identify the acceptance
+    criteria and dependencies.
+3.  State the proposed task scope and files expected to change.
+4.  Make the smallest coherent change; reuse existing components and
+    patterns.
+5.  Do not rewrite working pages or restructure folders without a
+    demonstrated need and approval.
+6.  Do not implement deferred features as hidden dependencies.
+7.  Test the changed behaviour and relevant nearby behaviour.
+8.  Report changed files, commands actually run, results, and
+    limitations.
+9.  Stop and wait for explicit owner approval before starting the next
+    task.
+10. If a reference document conflict or unresolved business decision
+    blocks the task, stop and ask rather than inventing a rule.
 
-1. Work on one coherent feature or small group of related tasks at a time.
-2. Read the requirements and relevant documentation before coding.
-3. Check the current repository and preserve working code.
-4. Implement only approved scope.
-5. Test the change before moving to the next task.
-6. Report files changed, checks run, results, and open issues.
-7. Do not introduce unapproved business rules or dependencies.
-8. Commit stable checkpoints using the repository's normal Git workflow.
-9. Update documentation when a decision changes.
-10. Do not store secrets or real student data in Git.
-11. Define each implementation task narrowly enough that its changes and acceptance criteria can be reviewed independently.
-12. Make the smallest coherent change necessary to satisfy the current task; avoid unrelated refactoring, redesigns, file moves, and dependency changes.
-13. Before coding, identify the specific section or component in scope and the files likely to be affected. Inspect the repository before assuming those files or components exist.
-14. Do not interpret a phase heading, complete section list, or future requirement as permission to implement all listed features in one task.
-15. After completing and verifying the current task, stop and wait for the project owner's explicit approval before starting another task.
+A task is not complete merely because the UI looks correct. Backend
+persistence, authorization, error handling, and relevant tests must work
+for the feature being delivered.
 
 ## 4. Phase overview
 
-| Phase | Goal | Main deliverables | Gate to continue |
-|---|---|---|---|
-| 0. Documentation and repository baseline | Make project instructions consistent and understand current setup | Six Markdown docs; repository/config review | Owner reviews docs; no unresolved contradiction blocks the next phase |
-| 1. Public site foundation | Establish working React app shell and visual foundation | App shell and global styles, followed by separately scoped tasks for shared header, footer, and responsive navigation | App runs/builds; navigation and layout checked |
-| 2. Public content pages/sections | Present the school's confirmed offerings and information | Individually implemented and reviewed homepage sections: hero, courses, About using the approved tutor photograph, process, approved testimonials, specialized previews, certification, and FAQ | Content accuracy and responsive behaviour reviewed |
-| 3. Shared inquiry journey | Complete the single form and contact path | One form before footer, validation, Contact/CTA anchors, WhatsApp link | Exactly one form; validation/accessibility checked; backend status is represented honestly |
-| 4. Public-site quality and launch | Prepare public site for release | SEO metadata, accessibility/performance checks, approved content, deployment | Hosting/domain/DNS decisions approved; production checks pass |
-| 5. Lead backend and admin lead management | Save and manage enquiries securely | Supabase integration, lead records, admin lead view/status | RLS, validation, spam handling, and admin authorization tested |
-| 6. Authentication and admin foundation | Enable account invitation and role-protected access | Supabase Auth, activation/recovery, protected admin area | Invitation/recovery flows and permissions tested |
-| 7. Student/class operations | Manage students, levels, schedules, attendance, and payments | Student records, class sessions, attendance, manual payment records | Access policies and representative workflows tested |
-| 8. Student portal | Give students access to their own permitted information | Dashboard, class joining, materials, certificates, announcements | Student isolation and class-link authorization tested |
-| 9. Operational improvements | Add only approved later capabilities | Potential family accounts, digital courses, additional content controls | Scope, business rules, and technical design approved |
-
-## 5. Phase 0 — Documentation and repository baseline
-
-Tasks:
-- Reconcile and maintain `docs/requirements.md` as the working baseline pending final owner approval.
-- Maintain `AGENTS.md` so it contains no superseded form/enrollment rules.
-- Cross-check and maintain `docs/architecture.md`, `docs/design-system.md`, `docs/implementation-plan.md`, and `docs/seo.md`.
-- Inspect `package.json`, Vite/Tailwind configuration, routes, assets, environment files, and Git status.
-- Confirm what already exists before creating duplicates.
-- Identify any documentation claims that conflict with current code.
-
-Acceptance criteria:
-- All six documents agree on the one-form rule, class frequency/duration, enrollment workflow, age handling, class-link timing, certificate authority, stack, and phase boundaries.
-- Existing code and assets are not removed or rewritten merely to match a proposed folder tree.
-- Open questions are listed, not silently decided.
-
-## 6. Phase 1 — Public site foundation
-
-Tasks must be executed individually, in order, with review and approval between tasks.
-
-1. Inspect the existing app entry point, `package.json`, scripts, routing setup, and current project structure. Report the findings without making unrelated code changes.
-2. Establish or verify the global typography, palette tokens, and base styles using the existing project configuration.
-3. Establish or verify the shared layout primitives needed by the public website.
-4. Implement or review the shared header and navigation as a separate task.
-5. Implement or review the shared footer as a separate task.
-6. Verify the responsive behaviour of the shared layout and navigation.
-7. Confirm that the existing route and anchor structure supports the approved homepage and the single inquiry/free-trial form.
-
-Do not combine these tasks into one large implementation unless the project owner explicitly approves a change to the task scope.
-
-Before each task, inspect the relevant existing files and identify the files expected to change. Preserve working code and avoid duplicating existing components.
-
-Keep the initial phase free of incomplete student/admin backend features.
-
-Acceptance criteria:
-- App starts and builds using the repository's actual scripts.
-- No horizontal overflow at 375, 425, 768, 1024, and 1440 px.
-- Keyboard focus and mobile navigation work.
-- Visual tokens come from `docs/design-system.md`.
-- Each foundation task is verified and approved independently before the next task begins.
-
-## 7. Phase 2 — Public content
-
-Implement the following tasks in order. Each numbered item is a separate implementation task, not a batch of tasks to execute together.
-
-### Task 2.1 — Hero section
-
-Implement only the hero section and its approved content, layout, and CTA behaviour.
-
-### Task 2.2 — Trust statistics
-
-Implement the trust-statistics section using only verified and approved statistics. If the content is not approved or verified, do not invent replacements.
-
-### Task 2.3 — Keyboard and Guitar courses
-
-Implement the course section and its approved Keyboard and Guitar information.
-
-### Task 2.4 — Tutor/About section
-
-Implement the About section using the approved tutor photograph and verified tutor information. Do not implement the deferred performance video.
-
-### Task 2.5 — Our Process section
-
-Implement the section explaining the approved teaching process.
-
-### Task 2.6 — Testimonials
-
-Implement the testimonials section using genuine, approved testimonials or reviews. Do not fabricate testimonials.
-
-### Task 2.7 — Specialized-course previews
-
-Implement the specialized-course previews using accurate, approved availability wording.
-
-### Task 2.8 — Certification information
-
-Implement the certification information using approved content and accurate wording.
-
-### Task 2.9 — FAQ section
-
-Implement the FAQ section using approved questions and answers.
-
-### Task 2.10 — Homepage integration review
-
-Review the order and integration of the completed sections against `docs/requirements.md`. Make only the integration changes necessary to preserve the approved order and layout. Do not use this task as an opportunity to redesign or rewrite completed sections.
-
-### Task execution rules
-
-- Complete only the current task.
-- Read the relevant requirements and design-system guidance before implementation.
-- Inspect existing components, styles, and assets before creating or replacing files.
-- Reuse appropriate existing components and design tokens.
-- Do not implement the next task automatically.
-- Verify the current section against its acceptance criteria and relevant responsive requirements.
-- Check for regressions in affected shared components.
-- Report the files changed, checks performed, results, and unresolved issues.
-- Stop and wait for the project owner's approval before beginning the next task.
-
-If a task depends on an unfinished shared component or an unresolved decision, identify the dependency and request clarification when necessary. Do not silently expand the task to include unrelated work.
-
-Acceptance criteria:
-
-- Each section satisfies its own approved content, layout, interaction, and accessibility requirements.
-- Claims, course availability, tutor credentials, statistics, and testimonials are verified and approved.
-- Student Performances does not appear in the initial public navigation or homepage.
-- The About section uses the approved tutor photograph; the performance video is deferred from the first release.
-- The homepage sections are integrated in the approved order.
-- No CTA points to a duplicate form or dead destination.
-- The current section is tested at the relevant supported viewport widths before its task is considered complete.
-- Changes to shared components are checked for regressions in affected sections.
-- Each task is reviewed and approved before the next task begins.
-- Phase 2 is not considered complete until all its applicable acceptance criteria are satisfied.
-
-## 8. Phase 3 — Single inquiry/free-trial form
-
-Tasks:
-- Implement exactly one shared form immediately before the homepage footer.
-- Make Contact navigation and every trial CTA lead to this same form.
-- Use React Hook Form and Zod if compatible with the installed setup.
-- Validate date of birth as valid and not in the future; do not apply a blanket over-18 rule.
-- Include appropriate student and parent/guardian information.
-- Add clear submitting, success, and error states.
-- Connect submission to a backend only when the lead backend phase is approved and configured. Until then, do not claim durable submission.
-- Add the confirmed WhatsApp contact `+91 83010 62755`.
-
-Acceptance criteria:
-- Exactly one inquiry/free-trial form exists.
-- Contact and all trial CTAs resolve to it.
-- Keyboard and screen-reader interaction is usable.
-- No false success message is shown when submission fails.
-- The minimum age is not published on the website.
-
-## 9. Phase 4 — Public-site launch readiness
-
-Tasks:
-- Implement page-specific titles/descriptions, canonical URL strategy once the final domain/route map is approved, and relevant indexability rules.
-- Review images, video loading, font loading, layout shift, and mobile performance.
-- Check links, form state, accessibility, browser console, and production build.
-- Confirm official social/profile URLs and approved content.
-- Decide frontend host, DNS, SSL, environment variables, and deployment process before launch.
-
-Acceptance criteria:
-- Production build succeeds.
-- Public pages have appropriate metadata and no accidental private information.
-- Hosting/DNS decisions are explicitly approved and documented.
-- Final production URL and canonical URL use the same approved host format.
-
-## 10. Phase 5 — Lead management
-
-Prerequisites:
-- Public form behaviour and data fields are approved.
-- Supabase environment and schema are reviewed.
-- Admin access model and privacy needs are agreed.
-
-Tasks:
-- Create the lead schema and safe submission path.
-- Validate submitted data on the trusted backend as well as the client.
-- Add spam/abuse protection.
-- Add protected admin lead review and status updates.
-- Confirm final lead statuses and the WhatsApp notification mechanism.
-
-Acceptance criteria:
-- Valid leads persist only after backend confirmation.
-- Invalid/abusive submissions are handled safely.
-- Only authorised admins can read/update leads.
-- RLS and backend authorization are tested.
-
-## 11. Phase 6 — Authentication and admin foundation
-
-Tasks:
-- Configure Supabase Auth securely.
-- Admin creates/invites a student account after the student chooses to continue and one month's tuition has been collected in advance.
-- Send activation link by email; student/parent sets a password.
-- If activation expires, the user contacts admin for a replacement link. Do not invent the expiry duration.
-- Implement password recovery and protected admin access.
-- Treat Google login as optional until approved.
-- Ensure no permanent passwords are sent via WhatsApp.
-
-Acceptance criteria:
-- Invitation, activation, expired-link recovery path, and password recovery are verified.
-- Unauthorized users cannot access protected admin data through direct requests.
-- Roles are enforced in backend/database policies, not just React routes.
-
-## 12. Phase 7 — Student and class operations
-
-Tasks:
-- Admin manages student records and levels; Beginner is the default unless admin changes it.
-- Admin defines stage/level labels and updates student level/status.
-- Manage schedules and class sessions.
-- Support four classes per student per month, each 30–45 minutes.
-- Record attendance and manual payment records.
-- Record makeup arrangements agreed directly between tutor and student/parent.
-- Keep student level, enrollment status, exam results, and certificate issuance separate.
-
-Acceptance criteria:
-- Admin operations are protected and validated.
-- Students can access only their own authorised records.
-- No automated payment gateway is assumed.
-- Makeup/cancellation rules are not invented.
-
-## 13. Phase 8 — Student portal
-
-Tasks:
-- Display relevant upcoming class information.
-- Add Join Class button that activates five minutes before the scheduled start.
-- Retrieve class link only after server-side authorization of user, session, and allowed time.
-- Add attendance, payment history, assigned materials, issued certificates, and announcements as requirements are implemented.
-- Restrict files and certificates to authorised users.
-- Allow the admin to issue certificates based on approved criteria/decision.
-
-Acceptance criteria:
-- Unauthorized students cannot retrieve another student's class link or records.
-- Link is not exposed in public bundles or public storage.
-- Exact access cutoff after scheduled start is decided before implementation.
-- Certificate claims do not imply official accreditation without verification.
-
-## 14. Phase 9 — Later enhancements
-
-Possible candidates include family accounts, paid digital courses, additional admin content controls, and public student performances. These are not part of the first release and require explicit prioritisation and requirements before implementation.
-
-## 15. Cross-phase verification checklist
-
-For each relevant release:
-- Build/test/lint commands are discovered from actual `package.json` scripts and run.
-- No console errors or broken routes.
-- Responsive widths 375, 425, 768, 1024, and 1440 px are checked.
-- Keyboard navigation, visible focus, form labels/errors, contrast, and reduced motion are checked.
-- Public claims and testimonials are approved.
-- No secrets or student personal information are committed or exposed.
-- Protected data is checked with both authorised and unauthorised test users.
-- Documentation reflects the actual implementation and known limitations.
-
-### Individual task verification
-
-Before marking an implementation task complete, verify the following as applicable to its scope:
-
-- The requested feature or section satisfies its own acceptance criteria.
-- Only the approved scope has been implemented.
-- Existing functionality and working code have been preserved.
-- Responsive behaviour has been checked at the relevant supported viewport widths.
-- Accessibility has been checked for the changed elements.
-- Shared components and global styles have been regression-tested when affected.
-- Existing routes, navigation, CTAs, and form behaviour remain intact unless an approved change was required.
-- Available build, lint, and test commands relevant to the change have been run.
-- Any failed checks, untested behaviour, and unresolved issues are clearly reported.
-- The actual implementation and any changed decisions are reflected in the relevant documentation.
-
-Do not require unfinished sections to be implemented merely to verify the current task.
-
-A task may be complete even when the overall phase remains unfinished, provided that the task's acceptance criteria have been satisfied.
-
-After reporting the result, stop and wait for the project owner's approval before starting another task.
-
-## 16. Decisions that can block specific phases
-
-These do not all block public UI development. Resolve them when their phase needs them:
-- Exact form required/optional fields and consent wording.
-- Final lead statuses and allowed transitions.
-- WhatsApp notification mechanism.
-- Frontend hosting, DNS, SSL, deployment, and canonical domain format.
-- Final Supabase schema and administrative role model.
-- Activation-link expiry duration.
-- Google login decision.
-- Class-link access cutoff after the scheduled start.
-- Certificate stage names, templates, and eligibility criteria.
-- Data retention/deletion and account offboarding policy.
-- Prerendering/static rendering decision for SEO.
+  -----------------------------------------------------------------------
+  Phase                   Outcome                 MVP status
+  ----------------------- ----------------------- -----------------------
+  0\. Documentation and   Confirmed               Required
+  repository baseline     documentation, clean    
+                          baseline, verified      
+                          project structure       
+
+  1\. Lead submission and Enquiries persist and   Required
+  admin lead management   are securely manageable 
+                          by admin                
+
+  2\. Student management  Admin provisions        Required
+  and authentication      students; students      
+                          securely access their   
+                          own account             
+
+  3\. Learning materials  Admin uploads/assigns   Required
+                          private materials;      
+                          students access only    
+                          assigned materials      
+
+  4\. Class scheduling    Admin schedules         Required
+  and secure Zoom access  sessions; students see  
+                          and securely join their 
+                          own classes             
+
+  5\. MVP verification    Security, functional,   Required
+  and launch              responsive,             
+                          accessibility, and      
+                          deployment checks pass  
+
+  6\. Deferred            Attendance, payment     Later
+  improvements            records, announcements, 
+                          certificates, exams,    
+                          guardian accounts,      
+                          reports, etc.           
+  -----------------------------------------------------------------------
+
+## 5. Phase 0 --- Documentation and repository baseline
+
+### Task 0.1 --- Verify project documentation
+
+-   Check that requirements, schema, security, architecture,
+    implementation plan, design system, SEO, AGENTS, and README agree on
+    the immediate MVP.
+-   Preserve unresolved decisions explicitly.
+-   Do not treat a proposed decision as approved.
+
+**Acceptance criteria** - Document paths and links are valid. - MVP and
+deferred scope are consistent. - Known conflicts are reported and
+resolved or clearly marked as blockers.
+
+### Task 0.2 --- Inspect repository and environment
+
+-   Inspect project structure, `package.json`, Vite, Tailwind CSS v4,
+    routing, existing pages/components, and Supabase setup.
+-   Identify what is already implemented and reusable.
+-   Check `.gitignore` and ensure environment files/secrets are not
+    committed.
+-   Do not modify files during an inspection-only task.
+
+**Acceptance criteria** - A factual implementation inventory exists. -
+Missing setup and technical risks are identified. - No unnecessary
+rewrite is proposed.
+
+### Task 0.3 --- Establish a Git checkpoint
+
+-   Review `git status`.
+-   Commit only reviewed, intended documentation/configuration changes.
+-   Do not stage secrets, generated build output, or unrelated files.
+
+**Acceptance criteria** - A recoverable commit exists before substantial
+feature work.
+
+## 6. Phase 1 --- Lead submission and admin lead management
+
+**Phase outcome:** A prospective student/parent can submit the one
+shared enquiry form, the lead is stored, and an authenticated admin can
+review/manage it.
+
+### Task 1.1 --- Supabase environment and client setup
+
+-   Verify the Supabase project and environment configuration.
+-   Use only public client configuration in the browser.
+-   Keep service-role keys and other secrets out of frontend variables
+    and source control.
+-   Add clear configuration validation without printing secret values.
+
+**Acceptance criteria** - The application connects using the intended
+public client credentials. - Missing configuration produces a safe,
+understandable error. - No privileged key is bundled into the frontend.
+
+### Task 1.2 --- Lead database migration and policies
+
+-   Implement the `leads` table according to `docs/database-schema.md`.
+-   Add only the indexes, constraints, and fields specified by the
+    approved schema.
+-   Apply RLS and the approved public-submission/admin-read/admin-update
+    model from `docs/security.md`.
+-   Use migrations or the repository's established database-change
+    workflow.
+
+**Acceptance criteria** - Schema matches the reference document. -
+Anonymous users cannot read or enumerate leads. - Admin access is
+limited to authorized identities. - Negative authorization tests are
+included.
+
+### Task 1.3 --- Public enquiry form integration
+
+-   Reuse the existing single form immediately before the homepage
+    footer.
+-   Ensure Contact navigation and every trial CTA point to the same
+    form.
+-   Preserve approved field labels and validation requirements.
+-   Submit through the approved secure backend route/function.
+-   Prevent duplicate submissions where appropriate without inventing
+    business rules.
+
+**Acceptance criteria** - Valid submissions create a lead record. -
+Invalid submissions are rejected with field-level feedback. - The UI
+reports success only after confirmed persistence. - Backend failure
+leaves the form in a recoverable state and does not falsely report
+success. - The form remains responsive and accessible.
+
+### Task 1.4 --- Admin authentication and protected admin entry
+
+-   Implement admin sign-in using the approved Supabase Auth approach.
+-   Do not expose public admin signup.
+-   Use route protection for user experience and backend authorization
+    for actual security.
+-   Provide sign-out and safe session handling.
+
+**Acceptance criteria** - Authorized admin can sign in and sign out. -
+Unauthenticated users cannot access admin data. - A normal authenticated
+student cannot perform admin operations. - Direct API/database access is
+also denied where not authorized.
+
+### Task 1.5 --- Admin lead list and detail
+
+-   Build a responsive lead list/detail interface using existing design
+    tokens.
+-   Display only approved lead fields.
+-   Add search/filter/status actions only where defined by
+    requirements/schema.
+-   Do not invent lead statuses or transitions; resolve OQ-04 before
+    implementing unspecified transitions.
+
+**Acceptance criteria** - Admin can retrieve and review permitted lead
+records. - Unauthorized users cannot retrieve them. - Loading, empty,
+error, and success states are present. - Data is not exposed in public
+routes or logs.
+
+### Task 1.6 --- Phase 1 verification
+
+Test:
+
+-   Valid and invalid enquiry submissions.
+-   Duplicate/abuse handling supported by the chosen implementation.
+-   Admin authentication and session expiry behaviour.
+-   Anonymous and student attempts to read/update leads.
+-   RLS policies and direct data access.
+-   Mobile form and admin layout.
+-   Production build and available lint/tests.
+
+**Phase gate:** Do not begin Phase 2 until lead submission and admin
+lead management pass their acceptance checks and the owner approves.
+
+## 7. Phase 2 --- Student management and authentication
+
+**Phase outcome:** Admin can create and provision a continuing student's
+account, manage the required course/enrolment record, and the student
+can activate and access only their own permitted data.
+
+### Task 2.1 --- Student and profile data
+
+-   Implement the required `profiles` and `students` structures
+    according to the schema.
+-   Preserve the distinction between Auth identity, user profile, and
+    student business record.
+-   Do not treat a parent contact as automatic account authorization.
+-   Support children and adults; DOB must be valid and not in the
+    future, with no blanket over-18 restriction.
+
+### Task 2.2 --- Admin-controlled student provisioning
+
+-   Build the admin student creation workflow.
+-   Follow the approved payment-before-account rule: if a student
+    continues after trial, one month's tuition is collected in advance
+    before account setup.
+-   Provision/invite the account through the trusted workflow described
+    in `security.md`.
+-   Never expose service-role credentials in the browser.
+-   Do not send permanent passwords through WhatsApp.
+-   Invitation expiry duration remains unresolved; expired-link recovery
+    is by contacting the admin for a replacement.
+
+### Task 2.3 --- Courses, levels, and enrolments
+
+-   Implement only the approved `courses`, `course_levels`, and
+    `enrollments` structures.
+-   Beginner is the default level.
+-   Admin controls level definitions and changes.
+-   Keep enrolment state and student level distinct.
+-   Use enrolment records for authorization only as specified by the
+    schema and security rules.
+
+### Task 2.4 --- Student sign-in and protected dashboard shell
+
+-   Implement student login, logout, and approved account
+    activation/recovery.
+-   Do not add public student self-registration.
+-   Build a minimal student dashboard shell and profile summary.
+-   Enforce ownership through RLS and trusted operations, not just React
+    route checks.
+
+**Acceptance criteria** - Admin can provision a student through the
+approved flow. - Student can activate and authenticate. - Student can
+access only their own allowed records. - Public users cannot create
+student accounts. - Students cannot elevate their role or read another
+student's data.
+
+**Phase gate:** Verify role isolation, invitation flow, RLS, and admin
+provisioning before Phase 3.
+
+## 8. Phase 3 --- Learning materials
+
+**Phase outcome:** Admin can upload private learning materials, assign
+them according to the approved data model, and students can access only
+their assigned resources.
+
+### Task 3.1 --- Private Storage configuration
+
+-   Create/configure the approved private Storage bucket and policies.
+-   Follow `docs/database-schema.md` and `docs/security.md`.
+-   Validate allowed file types and size according to confirmed
+    settings; if limits are unresolved, ask before enforcing arbitrary
+    business limits.
+-   Use safe object paths and metadata; do not expose public object URLs
+    for private resources.
+
+### Task 3.2 --- Admin material upload and metadata
+
+-   Implement upload UI with progress, success, failure, and retry
+    states.
+-   Store metadata in `learning_materials`.
+-   Do not claim an upload succeeded until Storage and metadata
+    operations have both succeeded or the UI clearly reports partial
+    failure and recovery.
+
+### Task 3.3 --- Material assignment
+
+-   Implement `material_assignments` according to the approved schema.
+-   The exact assignment target (student versus enrolment) must follow
+    the current schema; if the schema still marks it unresolved, stop
+    and ask before implementing.
+-   Admin can review and manage assignments within authorized scope.
+
+### Task 3.4 --- Student material access
+
+-   Show only materials assigned to the authenticated student.
+-   Use authorized downloads or short-lived signed access as specified
+    by security design.
+-   Test attempts to guess object paths or access another student's
+    material.
+
+**Acceptance criteria** - Private objects are not publicly readable. -
+Admin upload and assignment work. - Students can access only assigned
+materials. - Unauthorized download attempts fail. - Upload/download
+errors are handled clearly.
+
+**Phase gate:** Verify Storage policies and cross-student isolation
+before Phase 4.
+
+## 9. Phase 4 --- Class scheduling and secure Zoom access
+
+**Phase outcome:** Admin can schedule classes, students can see their
+own upcoming sessions, and a student receives a private Zoom link only
+after trusted authorization.
+
+### Task 4.1 --- Class-session data
+
+-   Implement `class_sessions` according to `docs/database-schema.md`.
+-   Preserve the four-classes-per-month and 30--45-minute class
+    expectations.
+-   Do not invent cancellation, expiry, makeup-credit, or automatic
+    rescheduling rules.
+-   Makeup lessons are agreed directly between tutor and student/parent
+    and the resulting schedule is updated.
+
+### Task 4.2 --- Admin scheduling interface
+
+-   Create/edit class sessions for the appropriate student/enrolment.
+-   Validate date/time and required relationships.
+-   Use the agreed timezone strategy; if it is not specified, identify
+    and resolve it before implementation.
+-   Do not expose Zoom secrets or private meeting URLs through public
+    data.
+
+### Task 4.3 --- Student upcoming-class view
+
+-   Show only the authenticated student's permitted sessions.
+-   Display date/time clearly in the agreed timezone.
+-   Handle no-upcoming-class and loading/error states.
+
+### Task 4.4 --- Secure Join Class operation
+
+-   The button activates five minutes before scheduled start.
+-   The student must be authenticated and authorized for that session.
+-   The Zoom link is returned only by a trusted server-side operation
+    after identity, enrolment/session ownership, and timing checks.
+-   Do not put private Zoom links in public frontend bundles or
+    unrestricted database responses.
+-   The post-end joining cutoff is unresolved. Do not implement the
+    proposed 15-minute-after-end rule until the owner confirms it and
+    `requirements.md` and `security.md` are reconciled.
+
+**Acceptance criteria** - Admin can create and manage the approved class
+schedule. - Student sees only their own upcoming classes. - Join is
+unavailable before the confirmed activation window. - Unauthorized users
+and students cannot retrieve other students' Zoom links. - The server
+rejects invalid, out-of-window, or unauthorized requests. - No post-end
+cutoff is assumed before the owner resolves it.
+
+**Phase gate:** Security-test the trusted Zoom operation before Phase 5.
+
+## 10. Phase 5 --- MVP verification and launch
+
+### Task 5.1 --- End-to-end workflow tests
+
+Verify:
+
+-   Visitor submits enquiry -\> lead is stored -\> admin reviews lead.
+-   Admin provisions student -\> student activates and signs in.
+-   Admin uploads/assigns material -\> student accesses assigned
+    material.
+-   Admin schedules class -\> student sees session -\> authorized
+    student joins securely.
+
+### Task 5.2 --- Security verification
+
+Verify:
+
+-   Supabase RLS for every MVP table.
+-   Private Storage object policies.
+-   No public signup or privilege escalation.
+-   Admin/student role separation.
+-   Cross-student data isolation.
+-   Trusted server-side Zoom authorization.
+-   No secrets in source, logs, frontend bundles, or public environment
+    variables.
+-   Safe handling of minors' personal information.
+
+### Task 5.3 --- Quality verification
+
+-   Responsive checks at 375px, 425px, 768px, 1024px, and 1440px, plus
+    intermediate widths.
+-   Keyboard navigation, visible focus, labels, validation messages, and
+    contrast.
+-   Loading, empty, success, and error states.
+-   Browser console and network checks.
+-   `npm run build` and configured lint/test scripts; report only
+    commands actually available and run.
+
+### Task 5.4 --- Production and launch
+
+-   Confirm frontend host, Supabase production configuration, DNS,
+    canonical domain, HTTPS, and environment variables.
+-   Configure production secrets only in trusted hosting/function
+    settings.
+-   Apply database migrations and Storage policies to production.
+-   Verify auth redirects, email delivery, domain configuration, and
+    production workflows.
+-   Complete essential public SEO checks without allowing SEO polish to
+    delay security or operational MVP completion.
+
+Do not assume Hostinger is the frontend host merely because the domain
+was registered there. Hosting choice remains a separate approved
+decision.
+
+**MVP launch gate:** All critical workflows and security checks must
+pass. Record any accepted limitation explicitly.
+
+## 11. Phase 6 --- Deferred improvements
+
+These are future features and are not MVP prerequisites:
+
+-   Attendance management.
+-   In-app payment records (manual payment collection continues outside
+    the application unless separately approved).
+-   Announcements.
+-   Certificates and exam results.
+-   Guardian accounts/family access.
+-   Advanced analytics and reports.
+-   Paid digital-course purchases and expanded learning-management
+    features.
+-   Tutor performance video integration.
+-   Additional public marketing pages or major visual redesigns.
+
+Each deferred feature requires its own requirements review,
+schema/security impact assessment, task plan, and owner approval before
+implementation.
+
+## 12. Cross-phase release rules
+
+-   Do not skip security work until the end; implement and test
+    authorization with each backend feature.
+-   Do not create tables, fields, buckets, functions, or roles outside
+    the approved schema/security design without approval.
+-   Do not claim features are implemented based on documentation alone.
+-   Keep requirements IDs intact when linking tasks and tests.
+-   Keep public pages separate from authenticated application routes.
+-   Ensure all trial CTAs and Contact navigation use the one shared
+    enquiry form.
+-   Use the approved tutor photograph; performance video remains
+    deferred.
+-   Preserve the existing working UI and avoid unrelated refactors.
+-   Every phase ends with a verification report and explicit approval
+    gate.
+
+## 13. Open decisions that may block specific tasks
+
+  -----------------------------------------------------------------------
+  Decision                            Blocks
+  ----------------------------------- -----------------------------------
+  Final lead statuses/transitions     Lead status workflow beyond basic
+  (OQ-04)                             review
+
+  Exact trial booking/confirmation    Automated appointment confirmation
+  process (OQ-05)                     
+
+  Meaning of a class section (OQ-06)  Detailed billing/section logic
+
+  Zoom post-end cutoff (OQ-08)        Final join-window implementation
+
+  Google login approval (OQ-09)       Google authentication
+
+  Material file                       Final upload validation and
+  limits/formats/retention (OQ-10)    retention
+
+  Timezone policy                     Class scheduling and display
+
+  Material assignment target if       Material assignment implementation
+  schema unresolved                   
+
+  Hosting/deployment decision         Production release
+  (OQ-13/OQ-17)                       
+
+  Legal/privacy page approval         Public launch
+  -----------------------------------------------------------------------
+
+Resolve a decision only when its dependent task is reached. Do not block
+unrelated tasks unnecessarily.

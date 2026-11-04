@@ -3,9 +3,11 @@
 ## Project Overview
 
 Ave Maria School of Music is a web application for an online music
-school offering keyboard and guitar lessons. Development is planned in
-stages: first the public website and lead-generation features, followed
-by secure student and admin areas.
+school offering one-to-one online Keyboard and Guitar lessons for
+children and adults. The immediate MVP combines the public website and
+trial-enquiry workflow with secure admin lead management,
+admin-controlled student accounts, student access, private learning
+materials, class scheduling, and secure Zoom joining.
 
 ### Main goals
 
@@ -115,22 +117,23 @@ address in your browser.
 
 Run these commands from the project root.
 
-  -----------------------------------------------------------------------
-  Command                             Purpose
-  ----------------------------------- -----------------------------------
-  `npm install`                       Installs project dependencies.
+  ---------------------------------------------------------------------
+  Command                            Purpose
+  ---------------------------------- ----------------------------------
+  `npm install`                      Installs project dependencies.
 
-  `npm run dev`                       Starts the Vite development server.
+  `npm run dev`                      Starts the Vite development
+                                     server.
 
-  `npm run build`                     Creates a production build, usually
-                                      in the `dist/` directory.
+  `npm run build`                    Creates a production build,
+                                     usually in the `dist/` directory.
 
-  `npm run preview`                   Serves the production build locally
-                                      for a preview.
+  `npm run preview`                  Serves the production build
+                                     locally for a preview.
 
-  `npm run lint`                      Runs ESLint, if a lint script is
-                                      configured in `package.json`.
-  -----------------------------------------------------------------------
+  `npm run lint`                     Runs ESLint, if a lint script is
+                                     configured in `package.json`.
+  ---------------------------------------------------------------------
 
 The standard Vite commands above work only if the corresponding scripts
 exist in `package.json`. If a command reports `Missing script`, inspect
@@ -177,18 +180,39 @@ Resolve relevant errors before committing changes.
 ### Existing Project Documentation
 
 -   `AGENTS.md` --- instructions for AI coding agents.
--   `docs/requirements.md` --- working requirements baseline pending final owner approval.
--   `docs/architecture.md` --- application architecture and code organisation.
+-   `docs/requirements.md` --- working requirements baseline pending
+    final owner approval.
+-   `docs/architecture.md` --- application architecture and code
+    organisation.
 -   `docs/implementation-plan.md` --- development phases and task order.
 -   `docs/seo.md` --- SEO and public-page requirements.
 -   `docs/design-system.md` --- visual design and reusable UI rules.
 
-### Planned Documentation (Later Phases)
+### Current Project Documentation
 
--   `docs/database-schema.md` (Planned) --- database tables and relationships.
--   `docs/security.md` (Planned) --- authentication, authorisation, and data protection.
--   `docs/testing.md` (Planned) --- testing strategy and acceptance checks.
--   `docs/deployment.md` (Planned) --- production hosting and release steps.
+-   `AGENTS.md` --- instructions and development workflow for AI coding
+    agents.
+-   `docs/requirements.md` --- business requirements, confirmed
+    decisions, unresolved questions, and acceptance criteria.
+-   `docs/architecture.md` --- application architecture and system
+    boundaries.
+-   `docs/database-schema.md` --- Supabase database tables,
+    relationships, priorities, and constraints.
+-   `docs/security.md` --- authentication, authorization, RLS, Storage,
+    trusted operations, and security checks.
+-   `docs/implementation-plan.md` --- phased delivery sequence, tasks,
+    dependencies, and phase gates.
+-   `docs/design-system.md` --- brand tokens, visual rules, responsive
+    behaviour, and component conventions.
+-   `docs/seo.md` --- SEO requirements for public pages.
 
-Add links to documents as they are created, and keep this README aligned
-with the actual project setup.
+### Future Documentation
+
+-   `docs/testing.md` --- dedicated testing strategy and test matrix
+    (not yet confirmed as created).
+-   `docs/deployment.md` --- production hosting and release runbook (not
+    yet confirmed as created).
+
+Keep this README aligned with the actual repository and implemented
+functionality. A feature described in documentation must not be
+presented as already implemented unless verified in the application.
